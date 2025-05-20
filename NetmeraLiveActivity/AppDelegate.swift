@@ -7,14 +7,25 @@
 
 import UIKit
 import CoreData
+import NetmeraAnalytic
+import NetmeraNotification
+import NetmeraLocation
+import NetmeraNotificationInbox
+import NetmeraAdvertisingId
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        Netmera.initialize()
+        Netmera.setLogLevel(.debug) // Options: .debug, .info, .error, .fault
+        // Use .debug mode to view detailed Netmera logs
+        // Set the delegate for the notification center
+        Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
 
@@ -32,6 +43,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // Display the notification
+        if #available(iOS 14.0, *) {
+            // Use .banner and .list for iOS 14 and later
+            completionHandler([.banner, .list, .badge, .sound])
+        } else {
+            // Use .alert for earlier versions of iOS
+            completionHandler([.alert, .badge, .sound])
+        }
+    }
+
+    // Handle user interaction with notifications
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {

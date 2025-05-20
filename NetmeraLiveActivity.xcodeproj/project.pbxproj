@@ -6,6 +6,21 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A5B973112DDCDAAC00122D39 /* NetmeraAdvertisingId in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973102DDCDAAC00122D39 /* NetmeraAdvertisingId */; };
+		A5B973132DDCDAAC00122D39 /* NetmeraAnalytic in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973122DDCDAAC00122D39 /* NetmeraAnalytic */; };
+		A5B973152DDCDAAC00122D39 /* NetmeraAnalyticAutotracking in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973142DDCDAAC00122D39 /* NetmeraAnalyticAutotracking */; };
+		A5B973172DDCDAAC00122D39 /* NetmeraCore in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973162DDCDAAC00122D39 /* NetmeraCore */; };
+		A5B973192DDCDAAC00122D39 /* NetmeraGeofence in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973182DDCDAAC00122D39 /* NetmeraGeofence */; };
+		A5B9731B2DDCDAAC00122D39 /* NetmeraLiveActivity in Frameworks */ = {isa = PBXBuildFile; productRef = A5B9731A2DDCDAAC00122D39 /* NetmeraLiveActivity */; };
+		A5B9731D2DDCDAAC00122D39 /* NetmeraLocation in Frameworks */ = {isa = PBXBuildFile; productRef = A5B9731C2DDCDAAC00122D39 /* NetmeraLocation */; };
+		A5B9731F2DDCDAAC00122D39 /* NetmeraNotification in Frameworks */ = {isa = PBXBuildFile; productRef = A5B9731E2DDCDAAC00122D39 /* NetmeraNotification */; };
+		A5B973212DDCDAAC00122D39 /* NetmeraNotificationContentExtension in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973202DDCDAAC00122D39 /* NetmeraNotificationContentExtension */; };
+		A5B973232DDCDAAC00122D39 /* NetmeraNotificationCore in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973222DDCDAAC00122D39 /* NetmeraNotificationCore */; };
+		A5B973252DDCDAAC00122D39 /* NetmeraNotificationInbox in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973242DDCDAAC00122D39 /* NetmeraNotificationInbox */; };
+		A5B973272DDCDAAC00122D39 /* NetmeraNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = A5B973262DDCDAAC00122D39 /* NetmeraNotificationServiceExtension */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A5B972F22DDCDA7300122D39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +80,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5B9731B2DDCDAAC00122D39 /* NetmeraLiveActivity in Frameworks */,
+				A5B973172DDCDAAC00122D39 /* NetmeraCore in Frameworks */,
+				A5B973212DDCDAAC00122D39 /* NetmeraNotificationContentExtension in Frameworks */,
+				A5B9731D2DDCDAAC00122D39 /* NetmeraLocation in Frameworks */,
+				A5B973272DDCDAAC00122D39 /* NetmeraNotificationServiceExtension in Frameworks */,
+				A5B973252DDCDAAC00122D39 /* NetmeraNotificationInbox in Frameworks */,
+				A5B973132DDCDAAC00122D39 /* NetmeraAnalytic in Frameworks */,
+				A5B973192DDCDAAC00122D39 /* NetmeraGeofence in Frameworks */,
+				A5B973112DDCDAAC00122D39 /* NetmeraAdvertisingId in Frameworks */,
+				A5B973232DDCDAAC00122D39 /* NetmeraNotificationCore in Frameworks */,
+				A5B9731F2DDCDAAC00122D39 /* NetmeraNotification in Frameworks */,
+				A5B973152DDCDAAC00122D39 /* NetmeraAnalyticAutotracking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +152,18 @@
 			);
 			name = NetmeraLiveActivity;
 			packageProductDependencies = (
+				A5B973102DDCDAAC00122D39 /* NetmeraAdvertisingId */,
+				A5B973122DDCDAAC00122D39 /* NetmeraAnalytic */,
+				A5B973142DDCDAAC00122D39 /* NetmeraAnalyticAutotracking */,
+				A5B973162DDCDAAC00122D39 /* NetmeraCore */,
+				A5B973182DDCDAAC00122D39 /* NetmeraGeofence */,
+				A5B9731A2DDCDAAC00122D39 /* NetmeraLiveActivity */,
+				A5B9731C2DDCDAAC00122D39 /* NetmeraLocation */,
+				A5B9731E2DDCDAAC00122D39 /* NetmeraNotification */,
+				A5B973202DDCDAAC00122D39 /* NetmeraNotificationContentExtension */,
+				A5B973222DDCDAAC00122D39 /* NetmeraNotificationCore */,
+				A5B973242DDCDAAC00122D39 /* NetmeraNotificationInbox */,
+				A5B973262DDCDAAC00122D39 /* NetmeraNotificationServiceExtension */,
 			);
 			productName = NetmeraLiveActivity;
 			productReference = A5B972D82DDCDA7000122D39 /* NetmeraLiveActivity.app */;
@@ -208,6 +247,9 @@
 			);
 			mainGroup = A5B972CF2DDCDA7000122D39;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A5B972D92DDCDA7000122D39 /* Products */;
 			projectDirPath = "";
@@ -569,6 +611,80 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Netmera/swift-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A5B973102DDCDAAC00122D39 /* NetmeraAdvertisingId */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraAdvertisingId;
+		};
+		A5B973122DDCDAAC00122D39 /* NetmeraAnalytic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraAnalytic;
+		};
+		A5B973142DDCDAAC00122D39 /* NetmeraAnalyticAutotracking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraAnalyticAutotracking;
+		};
+		A5B973162DDCDAAC00122D39 /* NetmeraCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraCore;
+		};
+		A5B973182DDCDAAC00122D39 /* NetmeraGeofence */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraGeofence;
+		};
+		A5B9731A2DDCDAAC00122D39 /* NetmeraLiveActivity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraLiveActivity;
+		};
+		A5B9731C2DDCDAAC00122D39 /* NetmeraLocation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraLocation;
+		};
+		A5B9731E2DDCDAAC00122D39 /* NetmeraNotification */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraNotification;
+		};
+		A5B973202DDCDAAC00122D39 /* NetmeraNotificationContentExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraNotificationContentExtension;
+		};
+		A5B973222DDCDAAC00122D39 /* NetmeraNotificationCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraNotificationCore;
+		};
+		A5B973242DDCDAAC00122D39 /* NetmeraNotificationInbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraNotificationInbox;
+		};
+		A5B973262DDCDAAC00122D39 /* NetmeraNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B9730F2DDCDAAC00122D39 /* XCRemoteSwiftPackageReference "swift-sdk" */;
+			productName = NetmeraNotificationServiceExtension;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A5B972D02DDCDA7000122D39 /* Project object */;
 }
