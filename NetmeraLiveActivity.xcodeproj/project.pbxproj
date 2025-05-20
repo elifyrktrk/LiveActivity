@@ -1,0 +1,574 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		A5B972F22DDCDA7300122D39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5B972D02DDCDA7000122D39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5B972D72DDCDA7000122D39;
+			remoteInfo = NetmeraLiveActivity;
+		};
+		A5B972FC2DDCDA7300122D39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5B972D02DDCDA7000122D39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5B972D72DDCDA7000122D39;
+			remoteInfo = NetmeraLiveActivity;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A5B972D82DDCDA7000122D39 /* NetmeraLiveActivity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetmeraLiveActivity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5B972F12DDCDA7300122D39 /* NetmeraLiveActivityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetmeraLiveActivityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5B972FB2DDCDA7300122D39 /* NetmeraLiveActivityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetmeraLiveActivityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A5B973032DDCDA7300122D39 /* Exceptions for "NetmeraLiveActivity" folder in "NetmeraLiveActivity" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A5B972D72DDCDA7000122D39 /* NetmeraLiveActivity */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A5B972DA2DDCDA7000122D39 /* NetmeraLiveActivity */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A5B973032DDCDA7300122D39 /* Exceptions for "NetmeraLiveActivity" folder in "NetmeraLiveActivity" target */,
+			);
+			path = NetmeraLiveActivity;
+			sourceTree = "<group>";
+		};
+		A5B972F42DDCDA7300122D39 /* NetmeraLiveActivityTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = NetmeraLiveActivityTests;
+			sourceTree = "<group>";
+		};
+		A5B972FE2DDCDA7300122D39 /* NetmeraLiveActivityUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = NetmeraLiveActivityUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A5B972D52DDCDA7000122D39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5B972EE2DDCDA7300122D39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5B972F82DDCDA7300122D39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A5B972CF2DDCDA7000122D39 = {
+			isa = PBXGroup;
+			children = (
+				A5B972DA2DDCDA7000122D39 /* NetmeraLiveActivity */,
+				A5B972F42DDCDA7300122D39 /* NetmeraLiveActivityTests */,
+				A5B972FE2DDCDA7300122D39 /* NetmeraLiveActivityUITests */,
+				A5B972D92DDCDA7000122D39 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A5B972D92DDCDA7000122D39 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5B972D82DDCDA7000122D39 /* NetmeraLiveActivity.app */,
+				A5B972F12DDCDA7300122D39 /* NetmeraLiveActivityTests.xctest */,
+				A5B972FB2DDCDA7300122D39 /* NetmeraLiveActivityUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A5B972D72DDCDA7000122D39 /* NetmeraLiveActivity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5B973042DDCDA7300122D39 /* Build configuration list for PBXNativeTarget "NetmeraLiveActivity" */;
+			buildPhases = (
+				A5B972D42DDCDA7000122D39 /* Sources */,
+				A5B972D52DDCDA7000122D39 /* Frameworks */,
+				A5B972D62DDCDA7000122D39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A5B972DA2DDCDA7000122D39 /* NetmeraLiveActivity */,
+			);
+			name = NetmeraLiveActivity;
+			packageProductDependencies = (
+			);
+			productName = NetmeraLiveActivity;
+			productReference = A5B972D82DDCDA7000122D39 /* NetmeraLiveActivity.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A5B972F02DDCDA7300122D39 /* NetmeraLiveActivityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5B973092DDCDA7300122D39 /* Build configuration list for PBXNativeTarget "NetmeraLiveActivityTests" */;
+			buildPhases = (
+				A5B972ED2DDCDA7300122D39 /* Sources */,
+				A5B972EE2DDCDA7300122D39 /* Frameworks */,
+				A5B972EF2DDCDA7300122D39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5B972F32DDCDA7300122D39 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A5B972F42DDCDA7300122D39 /* NetmeraLiveActivityTests */,
+			);
+			name = NetmeraLiveActivityTests;
+			packageProductDependencies = (
+			);
+			productName = NetmeraLiveActivityTests;
+			productReference = A5B972F12DDCDA7300122D39 /* NetmeraLiveActivityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A5B972FA2DDCDA7300122D39 /* NetmeraLiveActivityUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5B9730C2DDCDA7300122D39 /* Build configuration list for PBXNativeTarget "NetmeraLiveActivityUITests" */;
+			buildPhases = (
+				A5B972F72DDCDA7300122D39 /* Sources */,
+				A5B972F82DDCDA7300122D39 /* Frameworks */,
+				A5B972F92DDCDA7300122D39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5B972FD2DDCDA7300122D39 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A5B972FE2DDCDA7300122D39 /* NetmeraLiveActivityUITests */,
+			);
+			name = NetmeraLiveActivityUITests;
+			packageProductDependencies = (
+			);
+			productName = NetmeraLiveActivityUITests;
+			productReference = A5B972FB2DDCDA7300122D39 /* NetmeraLiveActivityUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A5B972D02DDCDA7000122D39 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					A5B972D72DDCDA7000122D39 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					A5B972F02DDCDA7300122D39 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A5B972D72DDCDA7000122D39;
+					};
+					A5B972FA2DDCDA7300122D39 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A5B972D72DDCDA7000122D39;
+					};
+				};
+			};
+			buildConfigurationList = A5B972D32DDCDA7000122D39 /* Build configuration list for PBXProject "NetmeraLiveActivity" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A5B972CF2DDCDA7000122D39;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A5B972D92DDCDA7000122D39 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A5B972D72DDCDA7000122D39 /* NetmeraLiveActivity */,
+				A5B972F02DDCDA7300122D39 /* NetmeraLiveActivityTests */,
+				A5B972FA2DDCDA7300122D39 /* NetmeraLiveActivityUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A5B972D62DDCDA7000122D39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5B972EF2DDCDA7300122D39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5B972F92DDCDA7300122D39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A5B972D42DDCDA7000122D39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5B972ED2DDCDA7300122D39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5B972F72DDCDA7300122D39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A5B972F32DDCDA7300122D39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5B972D72DDCDA7000122D39 /* NetmeraLiveActivity */;
+			targetProxy = A5B972F22DDCDA7300122D39 /* PBXContainerItemProxy */;
+		};
+		A5B972FD2DDCDA7300122D39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5B972D72DDCDA7000122D39 /* NetmeraLiveActivity */;
+			targetProxy = A5B972FC2DDCDA7300122D39 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A5B973052DDCDA7300122D39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetmeraLiveActivity/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = netmera.NetmeraLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A5B973062DDCDA7300122D39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetmeraLiveActivity/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = netmera.NetmeraLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A5B973072DDCDA7300122D39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A5B973082DDCDA7300122D39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A5B9730A2DDCDA7300122D39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = netmera.NetmeraLiveActivityTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NetmeraLiveActivity.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NetmeraLiveActivity";
+			};
+			name = Debug;
+		};
+		A5B9730B2DDCDA7300122D39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = netmera.NetmeraLiveActivityTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NetmeraLiveActivity.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NetmeraLiveActivity";
+			};
+			name = Release;
+		};
+		A5B9730D2DDCDA7300122D39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = netmera.NetmeraLiveActivityUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NetmeraLiveActivity;
+			};
+			name = Debug;
+		};
+		A5B9730E2DDCDA7300122D39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = netmera.NetmeraLiveActivityUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NetmeraLiveActivity;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A5B972D32DDCDA7000122D39 /* Build configuration list for PBXProject "NetmeraLiveActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5B973072DDCDA7300122D39 /* Debug */,
+				A5B973082DDCDA7300122D39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5B973042DDCDA7300122D39 /* Build configuration list for PBXNativeTarget "NetmeraLiveActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5B973052DDCDA7300122D39 /* Debug */,
+				A5B973062DDCDA7300122D39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5B973092DDCDA7300122D39 /* Build configuration list for PBXNativeTarget "NetmeraLiveActivityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5B9730A2DDCDA7300122D39 /* Debug */,
+				A5B9730B2DDCDA7300122D39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5B9730C2DDCDA7300122D39 /* Build configuration list for PBXNativeTarget "NetmeraLiveActivityUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5B9730D2DDCDA7300122D39 /* Debug */,
+				A5B9730E2DDCDA7300122D39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A5B972D02DDCDA7000122D39 /* Project object */;
+}
