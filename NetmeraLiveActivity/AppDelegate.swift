@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Set the delegate for the notification center
         Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
         UNUserNotificationCenter.current().delegate = self
+        let user = NetmeraUser()
+        user.userId = "elif"
+        Netmera.updateUser(user: user)
         return true
     }
 
