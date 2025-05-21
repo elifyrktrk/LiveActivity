@@ -14,9 +14,9 @@ struct PomodoroWidget: Widget {
                         .font(.headline)
                 }
                 
-                Text(context.state.taskName)
-                    .font(.subheadline)
-                
+//                Text(context.state.taskName)
+//                    .font(.subheadline)
+//                
                 Text(timeString(from: context.state.remainingTime))
                     .font(.system(size: 40, weight: .bold, design: .rounded))
                     .foregroundColor(context.state.isBreak ? .orange : .red)
@@ -33,8 +33,8 @@ struct PomodoroWidget: Widget {
                     VStack(alignment: .leading) {
                         Text(context.state.isBreak ? "Break" : "Focus")
                             .font(.headline)
-                        Text(context.state.taskName)
-                            .font(.subheadline)
+//                        Text(context.state.taskName)
+//                            .font(.subheadline)
                     }
                 }
                 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>NetmeraLiveActivity.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>NetmeraLiveActivitySample.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>NetmeraLiveActivityWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>A519185D2DDD30B100D4A810</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A5B972D72DDCDA7000122D39</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A5B972F02DDCDA7300122D39</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A5B972FA2DDCDA7300122D39</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

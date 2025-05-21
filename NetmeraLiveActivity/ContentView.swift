@@ -1,5 +1,7 @@
 import SwiftUI
 import ActivityKit
+import NetmeraCore
+import NetmeraLiveActivity
 
 struct ContentView: View {
     @State private var matchActivity: Activity<MatchScoreAttributes>?
@@ -88,29 +90,39 @@ struct ContentView: View {
     }
     
     // MARK: - Match Score Activity
+//    Dökümana localden başlatılan activitynin update edilebilmesi için eklenecek örnek
+//    🔴 - [LiveActivityManagerImpl.swift] Cannot observe activity, missing required attribute: netmeraGroupId - group ıd verilmediğinde gelen log. Localden bir activity başlatılırken group id set ettiğinizden emin olun gibi dökümana eklenecek
+ 
     private func startMatchActivity() {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
             showError("Live Activities are not enabled")
             return
         }
         
-        let attributes = MatchScoreAttributes()
+        let attributes = MatchScoreAttributes(netmeraGroupId: "testGroupId",homeTeamName: "Barcelona",
+                                              awayTeamName: "Real Madrid",
+                                              homeTeamLogo: "barcelona_logo",
+                                              awayTeamLogo: "madrid_logo")
         let contentState = MatchScoreAttributes.ContentState(
             homeTeamScore: 0,
             awayTeamScore: 0,
-            minute: 0,
-            homeTeamName: "Barcelona",
-            awayTeamName: "Real Madrid",
-            homeTeamLogo: "barcelona_logo",
-            awayTeamLogo: "madrid_logo"
+            minute: 0
         )
         
         do {
             matchActivity = try Activity.request(
                 attributes: attributes,
                 contentState: contentState,
-                pushType: nil
-            )
+                pushType: .token
+            ) as Activity<MatchScoreAttributes>
+            if let matchActivity{
+                Netmera.observeActivity(matchActivity)
+//                - sadece localden başlatmak isteyenler için, register yaptıysa başlatıldığından haberimiz oluyor ama garantiye almak için o yüzden müşteriye kendiniz başlatıyorsanız localden observeu mutlaka çağırın şeklinde ekleyeceğiz doc'a
+            }
+            
+//            Netmera.unregister senaryo : bir maç favoriden kaldırılsa
+
+            
             print("Match activity started successfully")
         } catch {
             showError("Error starting match activity: \(error.localizedDescription)")
@@ -128,11 +140,11 @@ struct ContentView: View {
                 let updatedContentState = MatchScoreAttributes.ContentState(
                     homeTeamScore: Int.random(in: 0...5),
                     awayTeamScore: Int.random(in: 0...5),
-                    minute: Int.random(in: 1...90),
-                    homeTeamName: "Barcelona",
-                    awayTeamName: "Real Madrid",
-                    homeTeamLogo: "barcelona_logo",
-                    awayTeamLogo: "madrid_logo"
+                    minute: Int.random(in: 1...90)
+//                    homeTeamName: "Barcelona",
+//                    awayTeamName: "Real Madrid",
+//                    homeTeamLogo: "barcelona_logo",
+//                    awayTeamLogo: "madrid_logo"
                 )
                 
                 await activity.update(using: updatedContentState)
@@ -242,15 +254,15 @@ struct ContentView: View {
     
     // MARK: - Flight Tracking Activity
     private func startFlightActivity() {
-        let attributes = FlightTrackingAttributes()
+        let attributes = FlightTrackingAttributes(netmeraGroupId: "testGroupIdForFlight", flightNumber: "123", arrivalCity: "IST", airlineLogo: "logo", departureCity: "ANK")
         let contentState = FlightTrackingAttributes.ContentState(
-            flightNumber: "THY123",
+//            flightNumber: "THY123",
             departureTime: Date().addingTimeInterval(3600),
             arrivalTime: Date().addingTimeInterval(7200),
-            departureCity: "Istanbul",
-            arrivalCity: "London",
-            gateNumber: "210",
-            airlineLogo: "thy_logo"
+//            departureCity: "Istanbul",
+//            arrivalCity: "London",
+            gateNumber: "210"
+//            airlineLogo: "thy_logo"
         )
         
         do {
@@ -267,13 +279,13 @@ struct ContentView: View {
     private func updateFlightStatus() {
         Task {
             let updatedContentState = FlightTrackingAttributes.ContentState(
-                flightNumber: "THY123",
+//                flightNumber: "THY123",
                 departureTime: Date().addingTimeInterval(3600),
                 arrivalTime: Date().addingTimeInterval(7200),
-                departureCity: "Istanbul",
-                arrivalCity: "London",
-                gateNumber: String(Int.random(in: 200...300)),
-                airlineLogo: "thy_logo"
+//                departureCity: "Istanbul",
+//                arrivalCity: "London",
+                gateNumber: String(Int.random(in: 200...300))
+//                airlineLogo: "thy_logo"
             )
             
             await flightActivity?.update(using: updatedContentState)
@@ -288,10 +300,10 @@ struct ContentView: View {
     
     // MARK: - Pomodoro Activity
     private func startPomodoroActivity() {
-        let attributes = PomodoroAttributes()
+        let attributes = PomodoroAttributes(netmeraGroupId: "groupIdForPomodoro", taskName: "test")
         let contentState = PomodoroAttributes.ContentState(
             remainingTime: 1500, // 25 minutes
-            taskName: "English Study",
+//            taskName: "English Study",
             isBreak: false
         )
         
@@ -310,7 +322,7 @@ struct ContentView: View {
         Task {
             let updatedContentState = PomodoroAttributes.ContentState(
                 remainingTime: Double.random(in: 300...1500),
-                taskName: "English Study",
+//                taskName: "English Study",
                 isBreak: Bool.random()
             )
             

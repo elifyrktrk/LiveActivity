@@ -1,21 +1,30 @@
 import ActivityKit
 import Foundation
-
+import NetmeraLiveActivity
+//bu kalsın app targeta eklenecek Live Activity . Bu kısım Dökümanda da belirtilecek sağ taraftaki Target Membership alanını kırmızı alan içine al
 // MARK: - Match Score Activity
-struct MatchScoreAttributes: ActivityAttributes {
+//NetmeraLiveActivityAttributes group id için zorunlu ekletiyoruz
+struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
+    var netmeraGroupId: String?
+    var homeTeamName: String
+    var awayTeamName: String
+    var homeTeamLogo: String
+    var awayTeamLogo: String
+    
     public static var activityIdentifier: String = "MatchScoreAttributes"
     
     public struct ContentState: Codable, Hashable {
         var homeTeamScore: Int
         var awayTeamScore: Int
         var minute: Int
-        var homeTeamName: String
-        var awayTeamName: String
+       
     }
 }
 
 // MARK: - Delivery Tracking Activity
-struct DeliveryTrackingAttributes: ActivityAttributes {
+struct DeliveryTrackingAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
+    var netmeraGroupId: String?
+    
     public static var activityIdentifier: String = "DeliveryTrackingAttributes"
     
     public struct ContentState: Codable, Hashable {
@@ -27,7 +36,9 @@ struct DeliveryTrackingAttributes: ActivityAttributes {
 }
 
 // MARK: - Public Transport Activity
-struct PublicTransportAttributes: ActivityAttributes {
+struct PublicTransportAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
+    var netmeraGroupId: String?
+    
     public static var activityIdentifier: String = "PublicTransportAttributes"
     
     public struct ContentState: Codable, Hashable {
@@ -39,26 +50,35 @@ struct PublicTransportAttributes: ActivityAttributes {
 }
 
 // MARK: - Flight Tracking Activity
-struct FlightTrackingAttributes: ActivityAttributes {
+struct FlightTrackingAttributes: ActivityAttributes , NetmeraLiveActivityAttributes {
+    var netmeraGroupId: String?
+    var flightNumber: String
+    var arrivalCity: String
+    var airlineLogo: String
+    var departureCity: String
+    
     public static var activityIdentifier: String = "FlightTrackingAttributes"
     
     public struct ContentState: Codable, Hashable {
-        var flightNumber: String
+        
         var departureTime: Date
         var arrivalTime: Date
-        var departureCity: String
-        var arrivalCity: String
         var gateNumber: String
+        
     }
 }
 
 // MARK: - Pomodoro Timer Activity
-struct PomodoroAttributes: ActivityAttributes {
+//Alternatif başka bir örnek ekleyebilirim. 
+struct PomodoroAttributes: ActivityAttributes , NetmeraLiveActivityAttributes {
+    var netmeraGroupId: String?
+    var taskName: String
+    
     public static var activityIdentifier: String = "PomodoroAttributes"
+    
     
     public struct ContentState: Codable, Hashable {
         var remainingTime: TimeInterval
-        var taskName: String
         var isBreak: Bool
     }
-} 
+}

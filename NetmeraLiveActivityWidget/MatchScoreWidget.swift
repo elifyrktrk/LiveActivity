@@ -9,13 +9,13 @@ struct MatchScoreWidget: Widget {
             HStack(spacing: 20) {
                 // Home Team
                 VStack {
-                    Text(context.state.homeTeamName.prefix(3))
-                        .font(.headline)
-                        .frame(width: 40, height: 40)
-                        .background(Color.gray.opacity(0.2))
-                        .clipShape(Circle())
-                    Text(context.state.homeTeamName)
-                        .font(.caption)
+//                    Text(context.state.homeTeamName.prefix(3))
+//                        .font(.headline)
+//                        .frame(width: 40, height: 40)
+//                        .background(Color.gray.opacity(0.2))
+//                        .clipShape(Circle())
+//                    Text(context.state.homeTeamName)
+//                        .font(.caption)
                     Text("\(context.state.homeTeamScore)")
                         .font(.title)
                         .bold()
@@ -33,16 +33,16 @@ struct MatchScoreWidget: Widget {
                 
                 // Away Team
                 VStack {
-                    Text(context.state.awayTeamName.prefix(3))
-                        .font(.headline)
-                        .frame(width: 40, height: 40)
-                        .background(Color.gray.opacity(0.2))
-                        .clipShape(Circle())
-                    Text(context.state.awayTeamName)
-                        .font(.caption)
-                    Text("\(context.state.awayTeamScore)")
-                        .font(.title)
-                        .bold()
+//                    Text(context.state.awayTeamName.prefix(3))
+//                        .font(.headline)
+//                        .frame(width: 40, height: 40)
+//                        .background(Color.gray.opacity(0.2))
+//                        .clipShape(Circle())
+//                    Text(context.state.awayTeamName)
+//                        .font(.caption)
+//                    Text("\(context.state.awayTeamScore)")
+//                        .font(.title)
+//                        .bold()
                 }
             }
             .padding()
@@ -52,11 +52,11 @@ struct MatchScoreWidget: Widget {
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
                     HStack {
-                        Text(context.state.homeTeamName.prefix(3))
-                            .font(.headline)
-                            .frame(width: 30, height: 30)
-                            .background(Color.gray.opacity(0.2))
-                            .clipShape(Circle())
+//                        Text(context.state.homeTeamName.prefix(3))
+//                            .font(.headline)
+//                            .frame(width: 30, height: 30)
+//                            .background(Color.gray.opacity(0.2))
+//                            .clipShape(Circle())
                         Text("\(context.state.homeTeamScore)")
                             .font(.title2)
                             .bold()
@@ -68,11 +68,11 @@ struct MatchScoreWidget: Widget {
                         Text("\(context.state.awayTeamScore)")
                             .font(.title2)
                             .bold()
-                        Text(context.state.awayTeamName.prefix(3))
-                            .font(.headline)
-                            .frame(width: 30, height: 30)
-                            .background(Color.gray.opacity(0.2))
-                            .clipShape(Circle())
+//                        Text(context.state.awayTeamName.prefix(3))
+//                            .font(.headline)
+//                            .frame(width: 30, height: 30)
+//                            .background(Color.gray.opacity(0.2))
+//                            .clipShape(Circle())
                     }
                 }
                 
