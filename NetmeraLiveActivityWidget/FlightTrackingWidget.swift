@@ -15,19 +15,19 @@ struct FlightTrackingWidget: Widget {
                 }
                 
                 HStack {
-//                    Text(context.state.flightNumber)
-//                        .font(.subheadline)
-//                        .bold()
-//                        .padding(.horizontal, 8)
-//                        .padding(.vertical, 4)
-//                        .background(Color.purple.opacity(0.1))
-//                        .cornerRadius(4)
+                    Text(context.attributes.flightNumber)
+                        .font(.subheadline)
+                        .bold()
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.purple.opacity(0.1))
+                        .cornerRadius(4)
                 }
                 
                 HStack {
                     VStack(alignment: .leading) {
-//                        Text(context.state.departureCity)
-//                            .font(.caption)
+                        Text(context.attributes.departureCity)
+                            .font(.caption)
                         Text(context.state.departureTime, style: .time)
                             .font(.subheadline)
                     }
@@ -40,8 +40,8 @@ struct FlightTrackingWidget: Widget {
                     Spacer()
                     
                     VStack(alignment: .trailing) {
-//                        Text(context.state.arrivalCity)
-//                            .font(.caption)
+                        Text(context.attributes.arrivalCity)
+                            .font(.caption)
                         Text(context.state.arrivalTime, style: .time)
                             .font(.subheadline)
                     }
@@ -61,8 +61,8 @@ struct FlightTrackingWidget: Widget {
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
                     VStack(alignment: .leading) {
-//                        Text(context.state.flightNumber)
-//                            .font(.headline)
+                        Text(context.attributes.flightNumber)
+                            .font(.headline)
                         Text("Gate \(context.state.gateNumber)")
                             .font(.subheadline)
                     }
@@ -79,16 +79,16 @@ struct FlightTrackingWidget: Widget {
                 
                 DynamicIslandExpandedRegion(.center) {
                     HStack {
-//                        Text(context.state.departureCity)
+                        Text(context.attributes.departureCity)
                         Image(systemName: "arrow.right")
                             .foregroundColor(.gray)
-//                        Text(context.state.arrivalCity)
+                        Text(context.attributes.arrivalCity)
                     }
                     .font(.caption)
                 }
             } compactLeading: {
-//                Text(context.state.flightNumber)
-//                    .font(.caption2)
+                Text(context.attributes.flightNumber)
+                    .font(.caption2)
             } compactTrailing: {
                 Text(context.state.departureTime, style: .time)
                     .font(.caption2)

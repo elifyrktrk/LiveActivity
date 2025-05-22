@@ -1,10 +1,19 @@
 import ActivityKit
 import Foundation
 import NetmeraLiveActivity
-//bu kalsın app targeta eklenecek Live Activity . Bu kısım Dökümanda da belirtilecek sağ taraftaki Target Membership alanını kırmızı alan içine al
+// ActivityAttributes yapısını tanımladığınız dosyada, sağ panelde bulunan “Target Membership” alanına dikkat edilmelidir.
+// Bu dosya, hem ana uygulama (main app) target’ına hem de Widget Extension target’ına dahil edilmelidir.
+// Xcode’da bu işlem, dosya seçiliyken sağ tarafta “Target Membership” kutularından ilgili target’ların işaretlenmesiyle yapılır.
+// Aksi halde Widget, bu struct'a erişemez ve derleme hatası alınabilir.
+
 // MARK: - Match Score Activity
-//NetmeraLiveActivityAttributes group id için zorunlu ekletiyoruz
+
 struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
+    // NetmeraLiveActivityAttributes group id için zorunlu ekletiyoruz
+    // NetmeraLiveActivityAttributes protokolü, grup bazlı Live Activity yönetimi için kullanılır.
+    // `netmeraGroupId` alanı zorunludur ve her activity için benzersiz bir değer atanmalıdır.
+    // Bu ID, Netmera'nın farklı kullanıcılara gönderilen aynı activity’leri gruplaması ve push ile güncellemesi için kullanılır.
+
     var netmeraGroupId: String?
     var homeTeamName: String
     var awayTeamName: String

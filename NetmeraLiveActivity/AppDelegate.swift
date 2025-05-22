@@ -15,11 +15,8 @@ import NetmeraAdvertisingId
 import NetmeraLiveActivity
 import ActivityKit
 
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,17 +26,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Set the delegate for the notification center
         Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
         UNUserNotificationCenter.current().delegate = self
+        // sil
         let user = NetmeraUser()
         user.userId = "elif"
         Netmera.updateUser(user: user)
         
-//        activity için register olunuyor Netmeraya tokenları takip etmesi için. didFİnish veya uygulamanın herhangi bir yerinde yapılabilir - başka bir sayfada dene(LiveActivityManager yazıp o şekilde dene). Start token'ı dinlemeye başlıyoruz. register işlemi nerede yapılırsa Netmera o zaman dinlemeye başlıyor. Start sonra hemen güncelleme yapılmamalı min 1 dklık süre olmalı
+        // iOS 17.2 ve üzeri sürümlerde Live Activity takibi için Netmera'ya register işlemi yapılmalıdır.
+        // Bu işlem sayesinde Netmera, belirli bir Activity türüne ait tokenları dinlemeye başlar.
+        // register(forType:name:) metodu, AppDelegate içerisindeki application(_:didFinishLaunchingWithOptions:)
+        // metodunda ya da uygulamanın herhangi bir yerinde çağırılabilir. register çağrısından sonra Netmera tokenları dinlemeye başlar.
+        // (LiveActivityManager yazıp o şekilde dene)
+
+        // Dikkat edilmesi gereken bir diğer nokta da şudur:
+        // register işlemi gerçekleştirildikten sonra, ilgili Live Activity için start işlemi yapılır.
+        // Start işleminden hemen sonra update çağrılmamalıdır. İlk güncelleme için minimum 1 dakikalık bir bekleme süresi önerilir.
         if #available(iOS 17.2, *) {
-              Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
-            }
-        
-        //            Localden activity başlattıktan sonra kullanıcı activityi kill ederse locallle bağlantımız kopuyor uygulama yeniden açıldığında yeniden observe edilmesi lazım. Bu işlem didFinishte yapılmalı. Remote başlatılan activityler için de aynı şekilde must bir adım olarak dökümana eklenecek. Bu metodu eklemediğimizde kullanıcı activityi kapatırsa haberimiz olmuyor. Bunu yapmamızın sebebi tokenların birikmemesi. Bir activity silindiğinde tokenı da temizleyebilmek için
+            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+        }
+
+  
+        // Local olarak başlatılan bir Live Activity, kullanıcı tarafından manuel olarak sonlandırıldığında
+        // uygulama ile olan bağlantısı kesilir. Bu durumda, uygulama tekrar açıldığında ilgili activity’yi
+        // yeniden observe (izleme) işlemi yapılmalıdır.
+
+        // Bu işlem, AppDelegate içerisindeki application(_:didFinishLaunchingWithOptions:) metodunda çağrılmalıdır.
+        // Böylece hem local başlatılan activity’ler hem de uzaktan (remote) başlatılan activity’ler yeniden izlenebilir hale gelir.
+
+        // Bu adım, özellikle remote başlatılan activity’ler için kritik öneme sahiptir ve mutlaka dökümana dahil edilmelidir.
+
+        // Eğer bu metot çağrılmazsa, kullanıcı bir activity’yi manuel olarak sonlandırdığında
+        // Netmera bu durumu fark edemez ve ilgili token’lar backend’de birikmeye devam eder.
+        // Bu da gereksiz token yığılmasına ve performans sorunlarına yol açabilir.
+
+        // Bu nedenle, bir activity sonlandırıldığında onunla ilişkili token’ın da temizlenebilmesi için
+        // bu metot mutlaka kullanılmalıdır.
         Netmera.resumeObservingActivities(ofType: Activity<MatchScoreAttributes>.self)
+        
         return true
     }
 

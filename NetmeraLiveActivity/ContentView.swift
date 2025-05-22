@@ -116,11 +116,22 @@ struct ContentView: View {
                 pushType: .token
             ) as Activity<MatchScoreAttributes>
             if let matchActivity{
+                // Netmera üzerinden başlatılmayan, yani uygulama tarafından local olarak başlatılan Live Activity’ler için
+                // Netmera.observeActivity(_:) metodunun çağrılması gerekir.
+
+                // Eğer daha önce register işlemi yapıldıysa, teorik olarak Netmera bu activity’nin başlatıldığını algılayabilir.
+                // Ancak bu durum her zaman garanti değildir. Bu nedenle, **özellikle activity uygulama tarafından local olarak başlatılıyorsa**
+                // güvenilir bir izleme sağlamak amacıyla observe işlemi mutlaka manuel olarak yapılmalıdır.
+
+                // Bu yöntemle, activity’nin yaşam döngüsü boyunca Netmera’nın ilgili token’ı takip etmesi ve gerektiğinde güncellemeleri işlemesi sağlanır.
+
+                // Bu adım, sadece local başlatma senaryoları için geçerlidir; remote başlatmalarda gerekli değildir.
+
                 Netmera.observeActivity(matchActivity)
-//                - sadece localden başlatmak isteyenler için, register yaptıysa başlatıldığından haberimiz oluyor ama garantiye almak için o yüzden müşteriye kendiniz başlatıyorsanız localden observeu mutlaka çağırın şeklinde ekleyeceğiz doc'a
             }
-            
-//            Netmera.unregister senaryo : bir maç favoriden kaldırılsa
+           
+            // Netmera.unregister(name: matchActivity)
+            // Netmera.unregister senaryo : bir maç favoriden kaldırılsa
 
             
             print("Match activity started successfully")
@@ -254,7 +265,7 @@ struct ContentView: View {
     
     // MARK: - Flight Tracking Activity
     private func startFlightActivity() {
-        let attributes = FlightTrackingAttributes(netmeraGroupId: "testGroupIdForFlight", flightNumber: "123", arrivalCity: "IST", airlineLogo: "logo", departureCity: "ANK")
+        let attributes = FlightTrackingAttributes(netmeraGroupId: "testGroupIdForFlight", flightNumber: "THY123", arrivalCity: "London", airlineLogo: "thy_logo", departureCity: "Istanbul")
         let contentState = FlightTrackingAttributes.ContentState(
 //            flightNumber: "THY123",
             departureTime: Date().addingTimeInterval(3600),
