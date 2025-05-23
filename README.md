@@ -96,7 +96,7 @@ func registerForMatchScoreActivity() {
 
 ### 3. Start a Live Activity Remotely via Netmera REST API
 
-```
+```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
 --header 'X-netmera-api-key: your_rest_api_key' \
 --header 'Content-Type: application/json' \
@@ -130,7 +130,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
 
 ### 4. Update a Live Activity Remotely via Netmera REST API
 
-```
+```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 --header 'X-netmera-api-key: your_rest_api_key' \
 --header 'Content-Type: application/json' \
@@ -148,7 +148,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 
 ### 5. End a Live Activity Remotely via Netmera's REST API
 
-```
+```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 --header 'X-netmera-api-key: your_rest_api_key' \
 --header 'Content-Type: application/json' \
