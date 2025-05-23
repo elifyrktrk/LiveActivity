@@ -152,10 +152,6 @@ struct ContentView: View {
                     homeTeamScore: Int.random(in: 0...5),
                     awayTeamScore: Int.random(in: 0...5),
                     matchStatus: "Second Half"
-//                    homeTeamName: "Barcelona",
-//                    awayTeamName: "Real Madrid",
-//                    homeTeamLogo: "barcelona_logo",
-//                    awayTeamLogo: "madrid_logo"
                 )
                 
                 await activity.update(using: updatedContentState)

@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Set the delegate for the notification center
         Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
         UNUserNotificationCenter.current().delegate = self
+        
+        let liveActivityManager = LiveActivityManager()
+        liveActivityManager.registerForMatchScoreActivity()
+        
         // sil
         let user = NetmeraUser()
         user.userId = "elif"
@@ -43,10 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        if #available(iOS 17.2, *) {
 //            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
 //        }
-//        if using LiveActivityManager
-        let liveActivityManager = LiveActivityManager()
-            liveActivityManager.registerActivityType()
+        
+        
+
   
+        
         // Local olarak başlatılan bir Live Activity, kullanıcı tarafından manuel olarak sonlandırıldığında
         // uygulama ile olan bağlantısı kesilir. Bu durumda, uygulama tekrar açıldığında ilgili activity’yi
         // yeniden observe (izleme) işlemi yapılmalıdır.

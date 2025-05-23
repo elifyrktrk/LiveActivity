@@ -1,0 +1,261 @@
+# Netmera Live Activity Sample
+
+This project demonstrates how to use iOS Live Activities with Netmera integration. The project includes examples for different scenarios:
+
+- Match Score Tracking
+- Delivery Tracking
+- Public Transport Tracking
+- Flight Tracking
+- Financial Tracking
+
+## Requirements
+
+- iOS 16.1 or later
+- Xcode 14.1 or later
+- Netmera SDK
+- Apple Developer account (required for Live Activities)
+
+## Installation
+
+1. Clone the project:
+```bash
+git clone [repository-url]
+```
+
+2. Install CocoaPods dependencies:
+```bash
+pod install
+```
+
+3. Open the `.xcworkspace` file in Xcode.
+
+4. Configure necessary certificates and provisioning profiles:
+   - Push Notification certificate
+   - Live Activity capability
+   - App Groups capability
+
+## Configuration
+
+### Info.plist Settings
+
+Required Info.plist settings for the main app:
+
+```xml
+<key>NSSupportsLiveActivities</key>
+<true/>
+<key>NSSupportsLiveActivitiesFrequentUpdates</key>
+<true/>
+<key>UIBackgroundModes</key>
+<array>
+    <string>remote-notification</string>
+</array>
+<key>NSUserActivityTypes</key>
+<array>
+    <string>MatchScoreAttributes</string>
+    <string>DeliveryTrackingAttributes</string>
+    <string>PublicTransportAttributes</string>
+    <string>FlightTrackingAttributes</string>
+    <string>FintechAttributes</string>
+</array>
+```
+
+Required Info.plist settings for the Widget Extension:
+
+```xml
+<key>NSSupportsLiveActivities</key>
+<true/>
+<key>NSSupportsLiveActivitiesFrequentUpdates</key>
+<true/>
+```
+
+### Entitlements Settings
+
+Required entitlements for the main app:
+
+```xml
+<key>aps-environment</key>
+<string>development</string>
+<key>com.apple.security.application-groups</key>
+<array>
+    <string>group.com.netmera.liveactivity</string>
+</array>
+```
+
+## Live Activity Usage
+
+### 1. Activity Attributes Definition
+
+Each Live Activity requires a custom `ActivityAttributes` structure. Example:
+
+```swift
+struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
+    var netmeraGroupId: String?
+    var homeTeamName: String
+    var awayTeamName: String
+    var homeTeamLogo: String
+    var awayTeamLogo: String
+    
+    public static var activityIdentifier: String = "MatchScoreAttributes"
+    
+    public struct ContentState: Codable, Hashable {
+        var homeTeamScore: Int
+        var awayTeamScore: Int
+        var matchStatus: String
+    }
+}
+```
+
+### 2. Activity Registration
+
+For iOS 17.2 and later, Live Activities must be registered with Netmera for tracking:
+
+```swift
+@available(iOS 17.2, *)
+func registerForMatchScoreActivity() {
+    Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+}
+```
+
+### 3. Activity Start
+
+```swift
+func startMatchActivity() {
+    guard ActivityAuthorizationInfo().areActivitiesEnabled else {
+        return
+    }
+    
+    let attributes = MatchScoreAttributes(
+        netmeraGroupId: "testGroupId",
+        homeTeamName: "Barcelona",
+        awayTeamName: "Real Madrid",
+        homeTeamLogo: "barcelona_logo",
+        awayTeamLogo: "madrid_logo"
+    )
+    
+    let contentState = MatchScoreAttributes.ContentState(
+        homeTeamScore: 0,
+        awayTeamScore: 0,
+        matchStatus: "1st half"
+    )
+    
+    do {
+        let activity = try Activity.request(
+            attributes: attributes,
+            contentState: contentState,
+            pushType: .token
+        )
+        
+        // Observe process for locally started activities
+        Netmera.observeActivity(activity)
+    } catch {
+        print("Error starting activity: \(error)")
+    }
+}
+```
+
+### 4. Activity Update
+
+```swift
+func updateMatchScore() {
+    guard let activity = matchActivity else { return }
+    
+    Task {
+        let updatedContentState = MatchScoreAttributes.ContentState(
+            homeTeamScore: 2,
+            awayTeamScore: 1,
+            matchStatus: "2nd half"
+        )
+        
+        await activity.update(using: updatedContentState)
+    }
+}
+```
+
+### 5. Activity End
+
+```swift
+func endMatchActivity() {
+    guard let activity = matchActivity else { return }
+    
+    Task {
+        await activity.end(dismissalPolicy: .immediate)
+    }
+}
+```
+
+## Important Notes
+
+1. **netmeraGroupId**: A unique group ID must be assigned for each activity. This ID allows Netmera to group the same activities sent to different users.
+
+2. **Local Start**: For Live Activities started locally by the app, the `Netmera.observeActivity(_:)` method must be called.
+
+3. **Update Timing**: Updates should not be made immediately after starting an activity. A minimum wait time of 1 minute is recommended for the first update.
+
+4. **Activity End**: For activities manually ended by the user, the `Netmera.resumeObservingActivities(ofType:)` method should be called when the app is reopened.
+
+## Widget Design
+
+Each Live Activity requires a custom widget design. Example widget structure:
+
+```swift
+struct MatchScoreWidget: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: MatchScoreAttributes.self) { context in
+            // Widget UI design
+        } dynamicIsland: { context in
+            DynamicIsland {
+                // Dynamic Island expanded view
+            } compactLeading: {
+                // Compact leading view
+            } compactTrailing: {
+                // Compact trailing view
+            } minimal: {
+                // Minimal view
+            }
+        }
+    }
+}
+```
+
+## Debugging
+
+1. **Activity Start Error**: When an activity cannot be started, check `ActivityAuthorizationInfo().areActivitiesEnabled`.
+
+2. **Update Error**: When an update operation fails, verify if the activity is still active.
+
+3. **Token Error**: "Cannot observe activity, missing required attribute: netmeraGroupId" error occurs when `netmeraGroupId` is missing.
+
+## Supported Scenarios
+
+1. **Match Score Tracking**
+   - Team names and logos
+   - Live score
+   - Match status
+
+2. **Delivery Tracking**
+   - Delivery status
+   - Remaining stops
+   - Estimated delivery time
+   - Courier information
+
+3. **Public Transport Tracking**
+   - Vehicle number
+   - Remaining time
+   - Stop name
+   - Vehicle type
+
+4. **Flight Tracking**
+   - Flight number
+   - Departure/arrival time
+   - Departure/arrival city
+   - Gate number
+   - Airline logo
+
+5. **Financial Tracking**
+   - Balance
+   - Change percentage
+   - Investment progress
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). 

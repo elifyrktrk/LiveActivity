@@ -10,9 +10,8 @@ import NetmeraLiveActivity
 
 struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
     // NetmeraLiveActivityAttributes group id için zorunlu ekletiyoruz
-    // NetmeraLiveActivityAttributes protokolü, grup bazlı Live Activity yönetimi için kullanılır.
     // `netmeraGroupId` alanı zorunludur ve her activity için benzersiz bir değer atanmalıdır.
-    // Bu ID, Netmera'nın farklı kullanıcılara gönderilen aynı activity’leri gruplaması ve push ile güncellemesi için kullanılır.
+    // Bu ID, Netmera'nın farklı kullanıcılara gönderilen aynı activity’leri gruplaması ve tek bir istek ile birden fazla userda aynı group idli activitynin güncellenmesini sağlar.
 
     var netmeraGroupId: String?
     var homeTeamName: String

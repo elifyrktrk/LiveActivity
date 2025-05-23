@@ -20,9 +20,24 @@ class LiveActivityManager {
     // Dikkat edilmesi gereken bir diğer nokta da şudur:
     // register işlemi gerçekleştirildikten sonra, ilgili Live Activity için start işlemi yapılır.
     // Start işleminden hemen sonra update çağrılmamalıdır. İlk güncelleme için minimum 1 dakikalık bir bekleme süresi önerilir.
-  @available(iOS 17.2, *)
-  func registerActivityType() {
-          Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
-  }
-
+    @available(iOS 17.2, *)
+    func registerForMatchScoreActivity() {
+            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+    }
+  
+    func registerForDeliveryTrackingActivity() {
+            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+    }
+    func registerForFintechActivity() {
+            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+    }
+    func registerForFlightTrackingActivity() {
+            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+    }
+    func registerForPublicTransportActivity() {
+            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+    }
+    
+    
+    
 }
