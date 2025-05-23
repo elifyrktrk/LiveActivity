@@ -15,25 +15,6 @@ This project demonstrates how to use iOS Live Activities with Netmera integratio
 - Netmera SDK
 - Apple Developer account (required for Live Activities)
 
-## Installation
-
-1. Clone the project:
-```bash
-git clone [repository-url]
-```
-
-2. Install CocoaPods dependencies:
-```bash
-pod install
-```
-
-3. Open the `.xcworkspace` file in Xcode.
-
-4. Configure necessary certificates and provisioning profiles:
-   - Push Notification certificate
-   - Live Activity capability
-   - App Groups capability
-
 ## Configuration
 
 ### Info.plist Settings
