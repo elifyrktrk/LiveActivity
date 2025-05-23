@@ -33,7 +33,7 @@
 		<string>DeliveryTrackingAttributes</string>
 		<string>PublicTransportAttributes</string>
 		<string>FlightTrackingAttributes</string>
-		<string>PomodoroAttributes</string>
+		<string>FintechAttributes</string>
 	</array>
 </dict>
 </plist>

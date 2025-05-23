@@ -40,10 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Dikkat edilmesi gereken bir diğer nokta da şudur:
         // register işlemi gerçekleştirildikten sonra, ilgili Live Activity için start işlemi yapılır.
         // Start işleminden hemen sonra update çağrılmamalıdır. İlk güncelleme için minimum 1 dakikalık bir bekleme süresi önerilir.
-        if #available(iOS 17.2, *) {
-            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
-        }
-
+//        if #available(iOS 17.2, *) {
+//            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+//        }
+//        if using LiveActivityManager
+        let liveActivityManager = LiveActivityManager()
+            liveActivityManager.registerActivityType()
   
         // Local olarak başlatılan bir Live Activity, kullanıcı tarafından manuel olarak sonlandırıldığında
         // uygulama ile olan bağlantısı kesilir. Bu durumda, uygulama tekrar açıldığında ilgili activity’yi

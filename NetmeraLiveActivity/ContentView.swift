@@ -8,7 +8,7 @@ struct ContentView: View {
     @State private var deliveryActivity: Activity<DeliveryTrackingAttributes>?
     @State private var transportActivity: Activity<PublicTransportAttributes>?
     @State private var flightActivity: Activity<FlightTrackingAttributes>?
-    @State private var pomodoroActivity: Activity<PomodoroAttributes>?
+    @State private var fintechActivity: Activity<FintechAttributes>?
     @State private var errorMessage: String?
     @State private var showError = false
     
@@ -63,15 +63,15 @@ struct ContentView: View {
                     }
                 }
                 
-                Section("Pomodoro Timer") {
-                    Button("Start Pomodoro") {
-                        startPomodoroActivity()
+                Section("Fintech Tracking") {
+                    Button("Start Fintech Activity") {
+                        startFintechActivity()
                     }
-                    Button("Update Timer") {
-                        updatePomodoroTimer()
+                    Button("Update  Fintech Activity") {
+                        updateFintechStatus()
                     }
-                    Button("End Pomodoro") {
-                        endPomodoroActivity()
+                    Button("End  Fintech Activity") {
+                        endFintechActivity()
                     }
                 }
             }
@@ -106,7 +106,7 @@ struct ContentView: View {
         let contentState = MatchScoreAttributes.ContentState(
             homeTeamScore: 0,
             awayTeamScore: 0,
-            minute: 0
+            matchStatus: "1st half"
         )
         
         do {
@@ -151,7 +151,7 @@ struct ContentView: View {
                 let updatedContentState = MatchScoreAttributes.ContentState(
                     homeTeamScore: Int.random(in: 0...5),
                     awayTeamScore: Int.random(in: 0...5),
-                    minute: Int.random(in: 1...90)
+                    matchStatus: "Second Half"
 //                    homeTeamName: "Barcelona",
 //                    awayTeamName: "Real Madrid",
 //                    homeTeamLogo: "barcelona_logo",
@@ -309,41 +309,43 @@ struct ContentView: View {
         }
     }
     
-    // MARK: - Pomodoro Activity
-    private func startPomodoroActivity() {
-        let attributes = PomodoroAttributes(netmeraGroupId: "groupIdForPomodoro", taskName: "test")
-        let contentState = PomodoroAttributes.ContentState(
-            remainingTime: 1500, // 25 minutes
-//            taskName: "English Study",
-            isBreak: false
+    // MARK: - Fintech Activity
+    private func startFintechActivity() {
+        let attributes = FintechAttributes()
+        let contentState = FintechAttributes.ContentState(
+            balance: 1.2,
+            changePercentage: 1.3,
+            isPositive: true,
+            investmentProgress: 2.4
         )
         
         do {
-            pomodoroActivity = try Activity.request(
+            fintechActivity = try Activity.request(
                 attributes: attributes,
                 contentState: contentState,
                 pushType: nil
             )
         } catch {
-            print("Error starting pomodoro activity: \(error.localizedDescription)")
+            print("Error starting Fintech activity: \(error.localizedDescription)")
         }
     }
     
-    private func updatePomodoroTimer() {
+    private func updateFintechStatus() {
         Task {
-            let updatedContentState = PomodoroAttributes.ContentState(
-                remainingTime: Double.random(in: 300...1500),
-//                taskName: "English Study",
-                isBreak: Bool.random()
+            let updatedContentState = FintechAttributes.ContentState(
+                balance: 2.2,
+                changePercentage: 5.3,
+                isPositive: false,
+                investmentProgress: 4.4
             )
             
-            await pomodoroActivity?.update(using: updatedContentState)
+            await fintechActivity?.update(using: updatedContentState)
         }
     }
     
-    private func endPomodoroActivity() {
+    private func endFintechActivity() {
         Task {
-            await pomodoroActivity?.end(dismissalPolicy: .immediate)
+            await fintechActivity?.end(dismissalPolicy: .immediate)
         }
     }
 } 

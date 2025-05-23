@@ -15,6 +15,6 @@ struct NetmeraLiveActivityWidget: WidgetBundle {
         DeliveryTrackingWidget()
         PublicTransportWidget()
         FlightTrackingWidget()
-        PomodoroWidget()
+        FintechWidget()
     }
 }

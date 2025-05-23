@@ -23,7 +23,7 @@ struct PublicTransportWidget: Widget {
                 HStack {
                     Image(systemName: "clock.fill")
                         .foregroundColor(.green)
-                    Text("Arriving in \(context.state.remainingTime) minutes")
+                    Text("Match Status \(context.state.remainingTime) ")
                         .font(.caption)
                 }
             }

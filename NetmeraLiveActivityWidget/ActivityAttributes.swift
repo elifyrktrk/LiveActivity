@@ -25,7 +25,7 @@ struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
     public struct ContentState: Codable, Hashable {
         var homeTeamScore: Int
         var awayTeamScore: Int
-        var minute: Int
+        var matchStatus: String
        
     }
 }
@@ -77,17 +77,13 @@ struct FlightTrackingAttributes: ActivityAttributes , NetmeraLiveActivityAttribu
     }
 }
 
-// MARK: - Pomodoro Timer Activity
-//Alternatif başka bir örnek ekleyebilirim. 
-struct PomodoroAttributes: ActivityAttributes , NetmeraLiveActivityAttributes {
-    var netmeraGroupId: String?
-    var taskName: String
-    
-    public static var activityIdentifier: String = "PomodoroAttributes"
-    
-    
+
+struct FintechAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
-        var remainingTime: TimeInterval
-        var isBreak: Bool
+        var balance: Double
+        var changePercentage: Double
+        var isPositive: Bool
+        var investmentProgress: Double
     }
-}
+} 
+

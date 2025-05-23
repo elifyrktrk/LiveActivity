@@ -23,7 +23,7 @@ struct MatchScoreWidget: Widget {
                 
                 // Match Info
                 VStack {
-                    Text("\(context.state.minute)'")
+                    Text("\(context.state.matchStatus)'")
                         .font(.caption)
                         .foregroundColor(.gray)
                     Text("VS")
@@ -77,7 +77,7 @@ struct MatchScoreWidget: Widget {
                 }
                 
                 DynamicIslandExpandedRegion(.center) {
-                    Text("\(context.state.minute)'")
+                    Text("\(context.state.matchStatus)'")
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
