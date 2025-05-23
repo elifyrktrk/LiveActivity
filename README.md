@@ -161,61 +161,12 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 
 ## Widget Design
 
-Each Live Activity requires a custom widget design. Example widget structure:
-
-```swift
-struct MatchScoreWidget: Widget {
-    var body: some WidgetConfiguration {
-        ActivityConfiguration(for: MatchScoreAttributes.self) { context in
-            // Widget UI design
-        } dynamicIsland: { context in
-            DynamicIsland {
-                // Dynamic Island expanded view
-            } compactLeading: {
-                // Compact leading view
-            } compactTrailing: {
-                // Compact trailing view
-            } minimal: {
-                // Minimal view
-            }
-        }
-    }
-}
-```
+Each Live Activity requires a custom widget design. 
 
 ## Debugging
 
 1. **Token Error**: "Cannot observe activity, missing required attribute: netmeraGroupId" error occurs when `netmeraGroupId` is missing.
 
-## Supported Scenarios
 
-1. **Match Score Tracking**
-   - Team names and logos
-   - Live score
-   - Match status
-
-2. **Delivery Tracking**
-   - Delivery status
-   - Remaining stops
-   - Estimated delivery time
-   - Courier information
-
-3. **Public Transport Tracking**
-   - Vehicle number
-   - Remaining time
-   - Stop name
-   - Vehicle type
-
-4. **Flight Tracking**
-   - Flight number
-   - Departure/arrival time
-   - Departure/arrival city
-   - Gate number
-   - Airline logo
-
-5. **Financial Tracking**
-   - Balance
-   - Change percentage
-   - Investment progress
 
 
