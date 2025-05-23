@@ -10,7 +10,7 @@ This project demonstrates how to use iOS Live Activities with Netmera integratio
 
 ## Requirements
 
-- iOS 16.1 or later
+- iOS 17.2 or later
 - Xcode 14.1 or later
 - Netmera SDK
 - Apple Developer account (required for Live Activities)
