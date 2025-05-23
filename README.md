@@ -153,34 +153,36 @@ func startMatchActivity() {
 }
 ```
 
-### 4. Activity Update
+### 4. Activity Update With Netmera Rest API
 
-```swift
-func updateMatchScore() {
-    guard let activity = matchActivity else { return }
-    
-    Task {
-        let updatedContentState = MatchScoreAttributes.ContentState(
-            homeTeamScore: 2,
-            awayTeamScore: 1,
-            matchStatus: "2nd half"
-        )
-        
-        await activity.update(using: updatedContentState)
-    }
-}
+```
+curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
+--header 'X-netmera-api-key: your_rest_api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "groupId": "Barcelona-R.Madrid",
+    "action": "UPDATE",
+    "contentState": {
+        "homeTeamScore": 1,
+        "awayTeamScore": 0,
+        "matchStatus": "2nd Half"
+    },
+    "priority": 10
+}'
 ```
 
-### 5. Activity End
+### 5. Activity End With Netmera Rest API
 
-```swift
-func endMatchActivity() {
-    guard let activity = matchActivity else { return }
-    
-    Task {
-        await activity.end(dismissalPolicy: .immediate)
-    }
-}
+```
+curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
+--header 'X-netmera-api-key: your_rest_api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "groupId": "fb-gs",
+    "action": "END",
+    "priority": 10
+}'
+
 ```
 
 ## Important Notes
@@ -219,11 +221,7 @@ struct MatchScoreWidget: Widget {
 
 ## Debugging
 
-1. **Activity Start Error**: When an activity cannot be started, check `ActivityAuthorizationInfo().areActivitiesEnabled`.
-
-2. **Update Error**: When an update operation fails, verify if the activity is still active.
-
-3. **Token Error**: "Cannot observe activity, missing required attribute: netmeraGroupId" error occurs when `netmeraGroupId` is missing.
+1. **Token Error**: "Cannot observe activity, missing required attribute: netmeraGroupId" error occurs when `netmeraGroupId` is missing.
 
 ## Supported Scenarios
 
@@ -256,6 +254,4 @@ struct MatchScoreWidget: Widget {
    - Change percentage
    - Investment progress
 
-## License
 
-This project is licensed under the [MIT License](LICENSE). 
