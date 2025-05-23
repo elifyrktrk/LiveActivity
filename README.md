@@ -7,20 +7,14 @@ This project demonstrates how to use iOS Live Activities with Netmera integratio
 - Public Transport Tracking
 - Flight Tracking
 - Financial Tracking
-- 
-  <p align="center">
-  <img src="https://github.com/user-attachments/assets/ac5c5784-442f-4e50-adbb-05c654558ba5" width="100"/>
-  <img src="https://github.com/user-attachments/assets/b5973021-ef0d-42bd-a2c1-f4c41a1af9ef" width="100"/>
-  <img src="https://github.com/user-attachments/assets/6b008000-12c9-4695-9335-7a7459ec1d04" width="100"/>
-  <img src="https://github.com/user-attachments/assets/97ee5822-8cd6-401f-9e96-e12652c45164" width="100"/>
-  <img src="https://github.com/user-attachments/assets/037cb910-f332-482e-a5aa-f76ac7784a91" width="100"/>
+  
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ac5c5784-442f-4e50-adbb-05c654558ba5" width="140"/>
+  <img src="https://github.com/user-attachments/assets/b5973021-ef0d-42bd-a2c1-f4c41a1af9ef" width="140"/>
+  <img src="https://github.com/user-attachments/assets/6b008000-12c9-4695-9335-7a7459ec1d04" width="140"/>
+  <img src="https://github.com/user-attachments/assets/97ee5822-8cd6-401f-9e96-e12652c45164" width="140"/>
+  <img src="https://github.com/user-attachments/assets/037cb910-f332-482e-a5aa-f76ac7784a91" width="140"/>
 </p>
-![IMG_9227](https://github.com/user-attachments/assets/ac5c5784-442f-4e50-adbb-05c654558ba5)
-![IMG_9228](https://github.com/user-attachments/assets/b5973021-ef0d-42bd-a2c1-f4c41a1af9ef)
-![IMG_9229](https://github.com/user-attachments/assets/6b008000-12c9-4695-9335-7a7459ec1d04)
-![IMG_9230](https://github.com/user-attachments/assets/97ee5822-8cd6-401f-9e96-e12652c45164)
-![IMG_9231](https://github.com/user-attachments/assets/037cb910-f332-482e-a5aa-f76ac7784a91)
-
   
 
 ## Requirements
