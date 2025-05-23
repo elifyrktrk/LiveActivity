@@ -49,19 +49,6 @@ Required Info.plist settings for the Widget Extension:
 <true/>
 ```
 
-### Entitlements Settings
-
-Required entitlements for the main app:
-
-```xml
-<key>aps-environment</key>
-<string>development</string>
-<key>com.apple.security.application-groups</key>
-<array>
-    <string>group.com.netmera.liveactivity</string>
-</array>
-```
-
 ## Live Activity Usage
 
 ### 1. Activity Attributes Definition
