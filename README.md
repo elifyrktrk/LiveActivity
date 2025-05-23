@@ -173,7 +173,7 @@ Each Live Activity requires a custom widget design.
 
 ## Debugging
 
-1. **Error**: "Cannot observe activity, missing required attribute: netmeraGroupId" error occurs when `netmeraGroupId` is missing.
+1. **Error**: "🔴 - [LiveActivityManagerImpl.swift] Cannot observe activity, missing required attribute: netmeraGroupId" error occurs when `netmeraGroupId` is missing.
 
 
 
