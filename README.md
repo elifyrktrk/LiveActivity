@@ -116,44 +116,40 @@ func registerForMatchScoreActivity() {
 }
 ```
 
-### 3. Activity Start
+### 3. Start a Live Activity Remotely via Netmera REST API
 
-```swift
-func startMatchActivity() {
-    guard ActivityAuthorizationInfo().areActivitiesEnabled else {
-        return
+```
+curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
+--header 'X-netmera-api-key: your_rest_api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "message": {
+        "title": "Live Activity Start",
+        "text": "Here your live activity",
+        "platforms": [
+            "IOS"
+        ],
+        "contentState": {
+            "homeTeamScore": 0,
+            "awayTeamScore": 0,
+            "matchStatus": "1st Half"
+        },
+        "liveActAttr": {
+            "netmeraGroupId": "ars-liv-2025",
+            "homeTeamName": "Arsenal",
+            "awayTeamName": "Liverpool"
+            
+        },
+        "liveActAttrType": "MatchScoreAttributes"
+    },
+    "type": "LIVE_ACTIVITY",
+    "target": {
+        "sendToAll": true
     }
-    
-    let attributes = MatchScoreAttributes(
-        netmeraGroupId: "testGroupId",
-        homeTeamName: "Barcelona",
-        awayTeamName: "Real Madrid",
-        homeTeamLogo: "barcelona_logo",
-        awayTeamLogo: "madrid_logo"
-    )
-    
-    let contentState = MatchScoreAttributes.ContentState(
-        homeTeamScore: 0,
-        awayTeamScore: 0,
-        matchStatus: "1st half"
-    )
-    
-    do {
-        let activity = try Activity.request(
-            attributes: attributes,
-            contentState: contentState,
-            pushType: .token
-        )
-        
-        // Observe process for locally started activities
-        Netmera.observeActivity(activity)
-    } catch {
-        print("Error starting activity: \(error)")
-    }
-}
+}'
 ```
 
-### 4. Activity Update With Netmera Rest API
+### 4. Update a Live Activity Remotely via Netmera REST API
 
 ```
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
@@ -171,7 +167,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 }'
 ```
 
-### 5. Activity End With Netmera Rest API
+### 5. End a Live Activity Remotely via Netmera's REST API
 
 ```
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
