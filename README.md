@@ -91,7 +91,7 @@ Netmera.observeActivity(matchActivity)
 
 
 
-### 2. Activity Registration
+###  Activity Registration
 
 For iOS 17.2 and later, Live Activities must be registered with Netmera for tracking:
 
@@ -102,7 +102,7 @@ func registerForMatchScoreActivity() {
 }
 ```
 
-### 3. Start a Live Activity Remotely via Netmera REST API
+###  Start a Live Activity Remotely via Netmera REST API
 
 ```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
@@ -136,7 +136,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
 }'
 ```
 
-### 4. Update a Live Activity Remotely via Netmera REST API
+###  Update a Live Activity Remotely via Netmera REST API
 
 ```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
@@ -154,7 +154,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 }'
 ```
 
-### 5. End a Live Activity Remotely via Netmera's REST API
+###  End a Live Activity Remotely via Netmera's REST API
 
 ```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
