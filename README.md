@@ -126,6 +126,7 @@ In this example, the Live Activity represents a football match score update.
 > ⚠️ All fields inside `liveActAttr` are mandatory. Missing any of them (e.g., `awayTeamLogo`) will cause the request to fail and the Live Activity will not be shown.
 
 ---
+#### Sample Request
 ```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
 --header 'X-netmera-api-key: your_rest_api_key' \
