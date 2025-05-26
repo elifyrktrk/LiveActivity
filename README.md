@@ -92,6 +92,17 @@ To do this, call the following method **right after starting your activity**:
  Netmera.observeActivity(matchActivity)
 ```
 
+###  Activity Registration
+
+For iOS 17.2 and later, Live Activities must be registered with Netmera for tracking:
+
+```swift
+@available(iOS 17.2, *)
+func registerForMatchScoreActivity() {
+    Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+}
+```
+
 ###  Start a Live Activity Remotely via Netmera REST API
 
 ```xml
@@ -124,17 +135,6 @@ curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
         "sendToAll": true
     }
 }'
-```
-
-###  Activity Registration
-
-For iOS 17.2 and later, Live Activities must be registered with Netmera for tracking:
-
-```swift
-@available(iOS 17.2, *)
-func registerForMatchScoreActivity() {
-    Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
-}
 ```
 
 
