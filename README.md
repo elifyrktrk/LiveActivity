@@ -7,32 +7,22 @@ This project demonstrates how to use iOS Live Activities with Netmera integratio
 - Public Transport Tracking
 - Flight Tracking
 - Financial Tracking
+  
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/916a362f-27d0-4f05-832b-59cde9e5537e" width="160"/>
+  <img src="https://github.com/user-attachments/assets/37cc4dbe-52fe-4f07-a8f2-c4ca85164b87" width="160"/>
+  <img src="https://github.com/user-attachments/assets/ff4d7ca2-532a-4fe9-aacd-01961810f4f2" width="160"/>
+  <img src="https://github.com/user-attachments/assets/178d0869-8fd8-4483-be81-a60b44d6c544" width="160"/>
+  <img src="https://github.com/user-attachments/assets/5e19ae76-cf87-4d2b-9ff8-2ed57d2d277c" width="160"/>
+</p>
+
+  
 
 ## Requirements
 
-- iOS 16.1 or later
-- Xcode 14.1 or later
-- Netmera SDK
-- Apple Developer account (required for Live Activities)
-
-## Installation
-
-1. Clone the project:
-```bash
-git clone [repository-url]
-```
-
-2. Install CocoaPods dependencies:
-```bash
-pod install
-```
-
-3. Open the `.xcworkspace` file in Xcode.
-
-4. Configure necessary certificates and provisioning profiles:
-   - Push Notification certificate
-   - Live Activity capability
-   - App Groups capability
+- Ensure your Swift SDK version is at least 4.2.0
+- A p8 push certificate is required to enable Live Activity updates.
+- Starting with iOS 17.2, you can remotely initiate Live Activities via Netmera.
 
 ## Configuration
 
@@ -49,41 +39,12 @@ Required Info.plist settings for the main app:
 <array>
     <string>remote-notification</string>
 </array>
-<key>NSUserActivityTypes</key>
-<array>
-    <string>MatchScoreAttributes</string>
-    <string>DeliveryTrackingAttributes</string>
-    <string>PublicTransportAttributes</string>
-    <string>FlightTrackingAttributes</string>
-    <string>FintechAttributes</string>
-</array>
 ```
 
-Required Info.plist settings for the Widget Extension:
 
-```xml
-<key>NSSupportsLiveActivities</key>
-<true/>
-<key>NSSupportsLiveActivitiesFrequentUpdates</key>
-<true/>
-```
-
-### Entitlements Settings
-
-Required entitlements for the main app:
-
-```xml
-<key>aps-environment</key>
-<string>development</string>
-<key>com.apple.security.application-groups</key>
-<array>
-    <string>group.com.netmera.liveactivity</string>
-</array>
-```
-
-## Live Activity Usage
-
-### 1. Activity Attributes Definition
+## Step 1: Activity Attributes Definition
+ActivityAttributes: This protocol defines the static (unchanging) and dynamic (changing) content that will be displayed in the Live Activity.
+ActivityAttributes.ContentState: This type defines the dynamic data that will be updated throughout the lifecycle of the activity.
 
 Each Live Activity requires a custom `ActivityAttributes` structure. Example:
 
@@ -105,7 +66,25 @@ struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
 }
 ```
 
-### 2. Activity Registration
+## Step 2: Start the Activity
+
+First, choose how you want to register your activity:
+
+**Remote**: Use the `Netmera.register()` method early in your user lifecycle and before the push-to-start token is needed,  
+then start an activity using the `/rest/3.0/sendBulkNotification` endpoint.
+
+```swift
+ Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+```
+
+**Local**: If the Live Activity is started locally (not via Netmera), you must inform Netmera so it can track and manage the activity lifecycle.  
+To do this, call the following method **right after starting your activity**:
+
+```swift
+ Netmera.observeActivity(matchActivity)
+```
+
+###  Activity Registration
 
 For iOS 17.2 and later, Live Activities must be registered with Netmera for tracking:
 
@@ -116,71 +95,149 @@ func registerForMatchScoreActivity() {
 }
 ```
 
-### 3. Activity Start
+###  Start a Live Activity Remotely via Netmera REST API
+
+The following example demonstrates how to start a Live Activity on iOS devices via Netmera's `sendBulkNotification` endpoint.  
+In this example, the Live Activity represents a football match score update.
+
+#### Sample Request
+```xml
+curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
+--header 'X-netmera-api-key: your_rest_api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "message": {
+        "title": "Live Activity Start",
+        "text": "Here your live activity",
+        "platforms": [
+            "IOS"
+        ],
+        "contentState": {
+            "homeTeamScore": 0,
+            "awayTeamScore": 0,
+            "matchStatus": "1st Half"
+        },
+        "liveActAttr": {
+            "netmeraGroupId": "ars-liv-2025",
+            "homeTeamName": "Arsenal",
+            "awayTeamName": "Liverpool",
+            "homeTeamLogo": "barcelona_logo",
+            "awayTeamLogo": "madrid_logo"
+        },
+        "liveActAttrType": "MatchScoreAttributes"
+    },
+    "type": "LIVE_ACTIVITY",
+    "target": {
+        "sendToAll": true
+    }
+}'
+```
+### 📌 Key Parameters
+
+| Parameter             | Description |
+|-----------------------|-------------|
+| `type`                | Must be `"LIVE_ACTIVITY"` to activate the Live Activity feature. |
+| `contentState`        | Contains dynamic values that can be updated throughout the activity (e.g. score, match status). |
+| `liveActAttr`         | Contains static metadata used in the widget. All fields are required. |
+| `netmeraGroupId`      | A unique ID that groups the same activity across different users. |
+| `homeTeamName`        | Name of the home team to be displayed in the widget. |
+| `awayTeamName`        | Name of the away team to be displayed. |
+| `homeTeamLogo`        | Media identifier for the home team logo. |
+| `awayTeamLogo`        | Media identifier for the away team logo. |
+| `liveActAttrType`     | Must match the name of your `ActivityAttributes` Swift class/struct. |
+| `sendToAll`           | Set to `true` to broadcast the activity to all users. You can replace this with custom targeting if needed. |
+
+> ⚠️ All fields inside `liveActAttr` are mandatory. Missing any of them (e.g., `awayTeamLogo`) will cause the request to fail and the Live Activity will not be shown.
+
+---
+
+## Step 3: Resume Activity Tracking
+
+To ensure Netmera continues tracking Live Activities when the app is reopened:
+
+- If a Live Activity that was started locally is manually ended by the user,  
+its connection with the app is lost. Therefore, when the app is relaunched,  
+the activity must be observed again to restore tracking.
+
+This should be handled inside the `application(_:didFinishLaunchingWithOptions:)` method of your `AppDelegate`.  
+Doing so ensures that both locally and remotely started activities are properly re-observed on app launch.
 
 ```swift
-func startMatchActivity() {
-    guard ActivityAuthorizationInfo().areActivitiesEnabled else {
-        return
-    }
-    
-    let attributes = MatchScoreAttributes(
-        netmeraGroupId: "testGroupId",
-        homeTeamName: "Barcelona",
-        awayTeamName: "Real Madrid",
-        homeTeamLogo: "barcelona_logo",
-        awayTeamLogo: "madrid_logo"
-    )
-    
-    let contentState = MatchScoreAttributes.ContentState(
-        homeTeamScore: 0,
-        awayTeamScore: 0,
-        matchStatus: "1st half"
-    )
-    
-    do {
-        let activity = try Activity.request(
-            attributes: attributes,
-            contentState: contentState,
-            pushType: .token
-        )
+Netmera.resumeObservingActivities(ofType: Activity<MatchScoreAttributes>.self)
+```
+
+### Example
+
+```swift
+import UIKit
+import NetmeraLiveActivity
+import ActivityKit
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        Netmera.initialize()
+        Netmera.setLogLevel(.debug) // Options: .debug, .info, .error, .fault
+        // Use .debug mode to view detailed Netmera logs
         
-        // Observe process for locally started activities
-        Netmera.observeActivity(activity)
-    } catch {
-        print("Error starting activity: \(error)")
+        Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
+        UNUserNotificationCenter.current().delegate = self // Set the delegate for the notification center
+
+        let liveActivityManager = LiveActivityManager()
+        liveActivityManager.registerForMatchScoreActivity()
+        
+        if #available(iOS 16.1, *) {
+            Netmera.resumeObservingActivities(ofType: Activity<MatchScoreAttributes>.self)
+        }
+
+        return true
     }
 }
 ```
 
-### 4. Activity Update
+## Step 4:  Update a Live Activity Remotely via Netmera REST API
 
-```swift
-func updateMatchScore() {
-    guard let activity = matchActivity else { return }
-    
-    Task {
-        let updatedContentState = MatchScoreAttributes.ContentState(
-            homeTeamScore: 2,
-            awayTeamScore: 1,
-            matchStatus: "2nd half"
-        )
-        
-        await activity.update(using: updatedContentState)
-    }
-}
+```xml
+curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
+--header 'X-netmera-api-key: your_rest_api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "groupId": "ars-liv-2025",
+    "action": "UPDATE",
+    "contentState": {
+        "homeTeamScore": 1,
+        "awayTeamScore": 0,
+        "matchStatus": "2nd Half"
+    },
+    "priority": 10
+}'
 ```
 
-### 5. Activity End
+## Step 5:  End a Live Activity Remotely via Netmera's REST API
+
+```xml
+curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
+--header 'X-netmera-api-key: your_rest_api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "groupId": "ars-liv-2025",
+    "action": "END",
+    "priority": 10
+}'
+```
+## 🛑 Unregistering a Live Activity
+
+You can stop tracking a specific Live Activity using the `Netmera.unregister(name:)` method.
+
+#### 📌 Example Use Case:
+When a user removes a football match from their favorites, and no longer wants to see updates on the lock screen or widget, you should call:
 
 ```swift
-func endMatchActivity() {
-    guard let activity = matchActivity else { return }
-    
-    Task {
-        await activity.end(dismissalPolicy: .immediate)
-    }
-}
+Netmera.unregister(name: matchActivity)
 ```
 
 ## Important Notes
@@ -195,67 +252,12 @@ func endMatchActivity() {
 
 ## Widget Design
 
-Each Live Activity requires a custom widget design. Example widget structure:
-
-```swift
-struct MatchScoreWidget: Widget {
-    var body: some WidgetConfiguration {
-        ActivityConfiguration(for: MatchScoreAttributes.self) { context in
-            // Widget UI design
-        } dynamicIsland: { context in
-            DynamicIsland {
-                // Dynamic Island expanded view
-            } compactLeading: {
-                // Compact leading view
-            } compactTrailing: {
-                // Compact trailing view
-            } minimal: {
-                // Minimal view
-            }
-        }
-    }
-}
-```
+Each Live Activity requires a custom widget design. 
 
 ## Debugging
 
-1. **Activity Start Error**: When an activity cannot be started, check `ActivityAuthorizationInfo().areActivitiesEnabled`.
+1. **Error**: "🔴 - [LiveActivityManagerImpl.swift] Cannot observe activity, missing required attribute: netmeraGroupId" error occurs when `netmeraGroupId` is missing.
 
-2. **Update Error**: When an update operation fails, verify if the activity is still active.
 
-3. **Token Error**: "Cannot observe activity, missing required attribute: netmeraGroupId" error occurs when `netmeraGroupId` is missing.
 
-## Supported Scenarios
 
-1. **Match Score Tracking**
-   - Team names and logos
-   - Live score
-   - Match status
-
-2. **Delivery Tracking**
-   - Delivery status
-   - Remaining stops
-   - Estimated delivery time
-   - Courier information
-
-3. **Public Transport Tracking**
-   - Vehicle number
-   - Remaining time
-   - Stop name
-   - Vehicle type
-
-4. **Flight Tracking**
-   - Flight number
-   - Departure/arrival time
-   - Departure/arrival city
-   - Gate number
-   - Airline logo
-
-5. **Financial Tracking**
-   - Balance
-   - Change percentage
-   - Investment progress
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). 
