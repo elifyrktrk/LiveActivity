@@ -20,9 +20,9 @@ This project demonstrates how to use iOS Live Activities with Netmera integratio
 
 ## Requirements
 
-- iOS 17.2 or later
-- Netmera SDK 4.2.0 or later
-- Apple Developer account (required for Live Activities)
+- Ensure your Swift SDK version is at least 4.2.0
+- A p8 push certificate is required to enable Live Activity updates.
+- Starting with iOS 17.2, you can remotely initiate Live Activities via Netmera.
 
 ## Configuration
 
