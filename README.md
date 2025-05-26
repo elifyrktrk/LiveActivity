@@ -88,6 +88,39 @@ To do this, call the following method **right after starting your activity**:
 Netmera.observeActivity(matchActivity)
 ```
 
+###  Start a Live Activity Remotely via Netmera REST API
+
+```xml
+curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
+--header 'X-netmera-api-key: your_rest_api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "message": {
+        "title": "Live Activity Start",
+        "text": "Here your live activity",
+        "platforms": [
+            "IOS"
+        ],
+        "contentState": {
+            "homeTeamScore": 0,
+            "awayTeamScore": 0,
+            "matchStatus": "1st Half"
+        },
+        "liveActAttr": {
+             "netmeraGroupId": "ars-liv-2025",
+            "homeTeamName": "Arsenal",
+            "awayTeamName": "Liverpool",
+            "homeTeamLogo": "barcelona_logo",
+            "awayTeamLogo": "madrid_logo"
+        },
+        "liveActAttrType": "MatchScoreAttributes"
+    },
+    "type": "LIVE_ACTIVITY",
+    "target": {
+        "sendToAll": true
+    }
+}'
+```
 
 ###  Activity Registration
 
@@ -150,41 +183,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 ```
 
 
-###  Start a Live Activity Remotely via Netmera REST API
 
-```xml
-curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
---header 'X-netmera-api-key: your_rest_api_key' \
---header 'Content-Type: application/json' \
---data '{
-    "message": {
-        "title": "Live Activity Start",
-        "text": "Here your live activity",
-        "platforms": [
-            "IOS"
-        ],
-        "contentState": {
-            "homeTeamScore": 0,
-            "awayTeamScore": 0,
-            "matchStatus": "1st Half"
-        },
-        "liveActAttr": {
-             "netmeraGroupId": "ars-liv-2025",
-            "homeTeamName": "Arsenal",
-            "awayTeamName": "Liverpool",
-            "homeTeamLogo": "barcelona_logo",
-            "awayTeamLogo": "madrid_logo"
-        },
-        "liveActAttrType": "MatchScoreAttributes"
-    },
-    "type": "LIVE_ACTIVITY",
-    "target": {
-        "sendToAll": true
-    }
-}'
-```
-
-###  Update a Live Activity Remotely via Netmera REST API
+## Step 4:  Update a Live Activity Remotely via Netmera REST API
 
 ```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
@@ -202,7 +202,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 }'
 ```
 
-###  End a Live Activity Remotely via Netmera's REST API
+## Step 5:  End a Live Activity Remotely via Netmera's REST API
 
 ```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
