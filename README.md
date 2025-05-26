@@ -105,6 +105,17 @@ func registerForMatchScoreActivity() {
 
 ###  Start a Live Activity Remotely via Netmera REST API
 
+The following example demonstrates how to start a Live Activity on iOS devices via Netmera's `sendBulkNotification` endpoint.  
+In this example, the Live Activity represents a football match score update.
+
+- **Required fields must be provided** for the Live Activity to start successfully.
+- The liveActAttr object must include **all required properties**.  
+  For example, if awayTeamLogo is missing, the Live Activity will not start and the request will fail.
+- netmeraGroupId must be a **unique ID** per activity. This allows grouping the same activity across different users.
+- The contentState object should include **dynamic values** (like score) that may change during the activity.
+- The liveActAttrType must match the name of your ActivityAttributes Swift struct or class.
+- In the example below, the Live Activity is sent to **all users** using "sendToAll": true. You can replace this with a targeted audience if needed.
+
 ```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
 --header 'X-netmera-api-key: your_rest_api_key' \
