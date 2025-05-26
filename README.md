@@ -108,14 +108,26 @@ func registerForMatchScoreActivity() {
 The following example demonstrates how to start a Live Activity on iOS devices via Netmera's `sendBulkNotification` endpoint.  
 In this example, the Live Activity represents a football match score update.
 
-- **Required fields must be provided** for the Live Activity to start successfully.
-- The liveActAttr object must include **all required properties**.  
-  For example, if awayTeamLogo is missing, the Live Activity will not start and the request will fail.
-- netmeraGroupId must be a **unique ID** per activity. This allows grouping the same activity across different users.
-- The contentState object should include **dynamic values** (like score) that may change during the activity.
-- The liveActAttrType must match the name of your ActivityAttributes Swift struct or class.
-- In the example below, the Live Activity is sent to **all users** using "sendToAll": true. You can replace this with a targeted audience if needed.
+### 📌 Key Parameters
 
+| Parameter             | Description |
+|-----------------------|-------------|
+| `title`, `text`       | Content of the notification shown to the user when the Live Activity starts. |
+| `platforms`           | Set to `"IOS"` to target iOS users. |
+| `type`                | Must be `"LIVE_ACTIVITY"` to activate the Live Activity feature. |
+| `contentState`        | Contains dynamic values that can be updated throughout the activity (e.g. score, match status). |
+| `liveActAttr`         | Contains static metadata used in the widget. All fields are required. |
+| `netmeraGroupId`      | A unique ID that groups the same activity across different users. |
+| `homeTeamName`        | Name of the home team to be displayed in the widget. |
+| `awayTeamName`        | Name of the away team to be displayed. |
+| `homeTeamLogo`        | Media identifier for the home team logo. |
+| `awayTeamLogo`        | Media identifier for the away team logo. |
+| `liveActAttrType`     | Must match the name of your `ActivityAttributes` Swift class/struct. |
+| `sendToAll`           | Set to `true` to broadcast the activity to all users. You can replace this with custom targeting if needed. |
+
+> ⚠️ All fields inside `liveActAttr` are mandatory. Missing any of them (e.g., `awayTeamLogo`) will cause the request to fail and the Live Activity will not be shown.
+
+---
 ```xml
 curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
 --header 'X-netmera-api-key: your_rest_api_key' \
