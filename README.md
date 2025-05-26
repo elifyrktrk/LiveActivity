@@ -214,7 +214,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 --header 'X-netmera-api-key: your_rest_api_key' \
 --header 'Content-Type: application/json' \
 --data '{
-    "groupId": "Barcelona-R.Madrid",
+    "groupId": "ars-liv-2025",
     "action": "UPDATE",
     "contentState": {
         "homeTeamScore": 1,
@@ -232,7 +232,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 --header 'X-netmera-api-key: your_rest_api_key' \
 --header 'Content-Type: application/json' \
 --data '{
-    "groupId": "fb-gs",
+    "groupId": "ars-liv-2025",
     "action": "END",
     "priority": 10
 }'
