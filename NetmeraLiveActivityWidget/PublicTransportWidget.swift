@@ -9,7 +9,7 @@ struct PublicTransportWidget: Widget {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Image(systemName: context.state.vehicleType == "bus" ? "bus.fill" : "tram.fill")
-                        .foregroundColor(.green)
+                        .foregroundColor(Color(red: 0.8, green: 0.4, blue: 0.2))
                     Text("Public Transport")
                         .font(.headline)
                 }
@@ -22,14 +22,16 @@ struct PublicTransportWidget: Widget {
                 
                 HStack {
                     Image(systemName: "clock.fill")
-                        .foregroundColor(.green)
+                        .foregroundColor(Color(red: 0.8, green: 0.4, blue: 0.2))
                     Text("Match Status \(context.state.remainingTime) ")
                         .font(.caption)
                 }
             }
             .padding()
-            .activityBackgroundTint(Color.green.opacity(0.1))
-            .activitySystemActionForegroundColor(.green)
+            .background(Color(red: 1.0, green: 0.97, blue: 0.95))
+            .cornerRadius(16)
+            .activityBackgroundTint(Color(red: 1.0, green: 0.97, blue: 0.95))
+            .activitySystemActionForegroundColor(Color(red: 0.8, green: 0.4, blue: 0.2))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {

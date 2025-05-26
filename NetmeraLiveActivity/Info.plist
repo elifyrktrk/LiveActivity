@@ -27,13 +27,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>NSUserActivityTypes</key>
-	<array>
-		<string>MatchScoreAttributes</string>
-		<string>DeliveryTrackingAttributes</string>
-		<string>PublicTransportAttributes</string>
-		<string>FlightTrackingAttributes</string>
-		<string>FintechAttributes</string>
-	</array>
 </dict>
 </plist>

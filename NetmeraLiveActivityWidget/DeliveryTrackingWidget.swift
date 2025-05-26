@@ -9,7 +9,7 @@ struct DeliveryTrackingWidget: Widget {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Image(systemName: "shippingbox.fill")
-                        .foregroundColor(.blue)
+                        .foregroundColor(Color(red: 0.4, green: 0.6, blue: 0.9))
                     Text("Delivery Tracking")
                         .font(.headline)
                 }
@@ -29,11 +29,13 @@ struct DeliveryTrackingWidget: Widget {
                 }
                 
                 ProgressView(value: Double(5 - context.state.remainingStops), total: 5)
-                    .tint(.blue)
+                    .tint(Color(red: 0.4, green: 0.6, blue: 0.9))
             }
             .padding()
-            .activityBackgroundTint(Color.blue.opacity(0.1))
-            .activitySystemActionForegroundColor(.blue)
+            .background(Color(red: 0.95, green: 0.97, blue: 1.0))
+            .cornerRadius(16)
+            .activityBackgroundTint(Color(red: 0.95, green: 0.97, blue: 1.0))
+            .activitySystemActionForegroundColor(Color(red: 0.4, green: 0.6, blue: 0.9))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {

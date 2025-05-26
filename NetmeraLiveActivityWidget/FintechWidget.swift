@@ -9,27 +9,29 @@ struct FintechWidget: Widget {
             VStack(spacing: 12) {
                 HStack {
                     Image(systemName: "dollarsign.circle.fill")
-                        .foregroundColor(.green)
+                        .foregroundColor(Color(red: 0.2, green: 0.8, blue: 0.4))
                     Text("Portfolio Status")
                         .font(.headline)
                 }
                 
                 Text("$\(String(format: "%.2f", context.state.balance))")
                     .font(.system(size: 40, weight: .bold, design: .rounded))
-                    .foregroundColor(.green)
+                    .foregroundColor(Color(red: 0.2, green: 0.8, blue: 0.4))
                 
                 HStack {
                     Image(systemName: context.state.isPositive ? "arrow.up.right" : "arrow.down.right")
                     Text("\(String(format: "%.1f", context.state.changePercentage))%")
                 }
-                .foregroundColor(context.state.isPositive ? .green : .red)
+                .foregroundColor(context.state.isPositive ? Color(red: 0.2, green: 0.8, blue: 0.4) : Color(red: 0.9, green: 0.3, blue: 0.3))
                 
                 ProgressView(value: context.state.investmentProgress, total: 100)
-                    .tint(.green)
+                    .tint(Color(red: 0.2, green: 0.8, blue: 0.4))
             }
             .padding()
-            .activityBackgroundTint(Color.green.opacity(0.1))
-            .activitySystemActionForegroundColor(.green)
+            .background(Color(red: 0.95, green: 0.98, blue: 0.95))
+            .cornerRadius(16)
+            .activityBackgroundTint(Color(red: 0.95, green: 0.98, blue: 0.95))
+            .activitySystemActionForegroundColor(Color(red: 0.2, green: 0.8, blue: 0.4))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {

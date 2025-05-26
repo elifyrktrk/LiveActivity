@@ -9,10 +9,10 @@ struct MatchScoreWidget: Widget {
             HStack(spacing: 20) {
                 // Home Team
                 VStack {
-                    Text(context.attributes.homeTeamName.prefix(3))
-                        .font(.headline)
+                    Image(context.attributes.homeTeamName.lowercased() == "real madrid" ? "madrid_logo" : "barcelona_logo")
+                        .resizable()
+                        .scaledToFit()
                         .frame(width: 40, height: 40)
-                        .background(Color.gray.opacity(0.2))
                         .clipShape(Circle())
                     Text(context.attributes.homeTeamName)
                         .font(.caption)
@@ -25,18 +25,18 @@ struct MatchScoreWidget: Widget {
                 VStack {
                     Text("\(context.state.matchStatus)'")
                         .font(.caption)
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.25))
                     Text("VS")
                         .font(.caption2)
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.25))
                 }
                 
                 // Away Team
                 VStack {
-                    Text(context.attributes.awayTeamName.prefix(3))
-                        .font(.headline)
+                    Image(context.attributes.awayTeamName.lowercased() == "real madrid" ? "madrid_logo" : "barcelona_logo")
+                        .resizable()
+                        .scaledToFit()
                         .frame(width: 40, height: 40)
-                        .background(Color.gray.opacity(0.2))
                         .clipShape(Circle())
                     Text(context.attributes.awayTeamName)
                         .font(.caption)
@@ -46,16 +46,18 @@ struct MatchScoreWidget: Widget {
                 }
             }
             .padding()
-            .activityBackgroundTint(Color.black.opacity(0.1))
-            .activitySystemActionForegroundColor(.black)
+            .background(Color(red: 0.98, green: 0.98, blue: 0.98))
+            .cornerRadius(16)
+            .activityBackgroundTint(Color(red: 0.98, green: 0.98, blue: 0.98))
+            .activitySystemActionForegroundColor(Color(red: 0.2, green: 0.2, blue: 0.25))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
                     HStack {
-                        Text(context.attributes.homeTeamName.prefix(3))
-                            .font(.headline)
+                        Image(context.attributes.homeTeamName.lowercased() == "real madrid" ? "madrid_logo" : "barcelona_logo")
+                            .resizable()
+                            .scaledToFit()
                             .frame(width: 30, height: 30)
-                            .background(Color.gray.opacity(0.2))
                             .clipShape(Circle())
                         Text("\(context.state.homeTeamScore)")
                             .font(.title2)
@@ -68,10 +70,10 @@ struct MatchScoreWidget: Widget {
                         Text("\(context.state.awayTeamScore)")
                             .font(.title2)
                             .bold()
-                        Text(context.attributes.awayTeamName.prefix(3))
-                            .font(.headline)
+                        Image(context.attributes.awayTeamName.lowercased() == "real madrid" ? "madrid_logo" : "barcelona_logo")
+                            .resizable()
+                            .scaledToFit()
                             .frame(width: 30, height: 30)
-                            .background(Color.gray.opacity(0.2))
                             .clipShape(Circle())
                     }
                 }

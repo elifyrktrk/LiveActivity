@@ -1,17 +1,16 @@
-import ActivityKit
 import Foundation
+import ActivityKit
 import NetmeraLiveActivity
-// ActivityAttributes yapısını tanımladığınız dosyada, sağ panelde bulunan “Target Membership” alanına dikkat edilmelidir.
-// Bu dosya, hem ana uygulama (main app) target’ına hem de Widget Extension target’ına dahil edilmelidir.
-// Xcode’da bu işlem, dosya seçiliyken sağ tarafta “Target Membership” kutularından ilgili target’ların işaretlenmesiyle yapılır.
-// Aksi halde Widget, bu struct'a erişemez ve derleme hatası alınabilir.
+
+// Make sure this file is added to both main app and widget extension targets via "Target Membership".
+// Otherwise, the widget cannot access this struct and will cause build errors.
 
 // MARK: - Match Score Activity
 
 struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
-    // NetmeraLiveActivityAttributes group id için zorunlu ekletiyoruz
-    // `netmeraGroupId` alanı zorunludur ve her activity için benzersiz bir değer atanmalıdır.
-    // Bu ID, Netmera'nın farklı kullanıcılara gönderilen aynı activity’leri gruplaması ve tek bir istek ile birden fazla userda aynı group idli activitynin güncellenmesini sağlar.
+    // Required for Netmera integration
+    // `netmeraGroupId` is mandatory and must be unique for each activity
+    // Used by Netmera to group identical activities across users and update them with a single request
 
     var netmeraGroupId: String?
     var homeTeamName: String

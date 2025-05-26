@@ -91,15 +91,14 @@ struct ContentView: View {
     
     // MARK: - Match Score Activity
 //    Dökümana localden başlatılan activitynin update edilebilmesi için eklenecek örnek
-//    🔴 - [LiveActivityManagerImpl.swift] Cannot observe activity, missing required attribute: netmeraGroupId - group ıd verilmediğinde gelen log. Localden bir activity başlatılırken group id set ettiğinizden emin olun gibi dökümana eklenecek
  
     private func startMatchActivity() {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
             showError("Live Activities are not enabled")
             return
         }
-        
-        let attributes = MatchScoreAttributes(netmeraGroupId: "testGroupId",homeTeamName: "Barcelona",
+        let attributes = MatchScoreAttributes(netmeraGroupId: "testGroupId",
+                                              homeTeamName: "Barcelona",
                                               awayTeamName: "Real Madrid",
                                               homeTeamLogo: "barcelona_logo",
                                               awayTeamLogo: "madrid_logo")
@@ -108,7 +107,6 @@ struct ContentView: View {
             awayTeamScore: 0,
             matchStatus: "1st half"
         )
-        
         do {
             matchActivity = try Activity.request(
                 attributes: attributes,
@@ -126,14 +124,8 @@ struct ContentView: View {
                 // Bu yöntemle, activity’nin yaşam döngüsü boyunca Netmera’nın ilgili token’ı takip etmesi ve gerektiğinde güncellemeleri işlemesi sağlanır.
 
                 // Bu adım, sadece local başlatma senaryoları için geçerlidir; remote başlatmalarda gerekli değildir.
-
                 Netmera.observeActivity(matchActivity)
             }
-           
-            // Netmera.unregister(name: matchActivity)
-            // Netmera.unregister senaryo : bir maç favoriden kaldırılsa
-
-            
             print("Match activity started successfully")
         } catch {
             showError("Error starting match activity: \(error.localizedDescription)")

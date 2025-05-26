@@ -9,7 +9,7 @@ struct FlightTrackingWidget: Widget {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Image(systemName: "airplane")
-                        .foregroundColor(.purple)
+                        .foregroundColor(Color(red: 0.6, green: 0.4, blue: 0.8))
                     Text("Flight Tracking")
                         .font(.headline)
                 }
@@ -20,7 +20,7 @@ struct FlightTrackingWidget: Widget {
                         .bold()
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(Color.purple.opacity(0.1))
+                        .background(Color(red: 0.6, green: 0.4, blue: 0.8).opacity(0.1))
                         .cornerRadius(4)
                 }
                 
@@ -35,7 +35,7 @@ struct FlightTrackingWidget: Widget {
                     Spacer()
                     
                     Image(systemName: "arrow.right")
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color(red: 0.6, green: 0.4, blue: 0.8))
                     
                     Spacer()
                     
@@ -49,14 +49,16 @@ struct FlightTrackingWidget: Widget {
                 
                 HStack {
                     Image(systemName: "door.left.hand.open")
-                        .foregroundColor(.purple)
+                        .foregroundColor(Color(red: 0.6, green: 0.4, blue: 0.8))
                     Text("Gate \(context.state.gateNumber)")
                         .font(.caption)
                 }
             }
             .padding()
-            .activityBackgroundTint(Color.purple.opacity(0.1))
-            .activitySystemActionForegroundColor(.purple)
+            .background(Color(red: 0.98, green: 0.97, blue: 1.0))
+            .cornerRadius(16)
+            .activityBackgroundTint(Color(red: 0.98, green: 0.97, blue: 1.0))
+            .activitySystemActionForegroundColor(Color(red: 0.6, green: 0.4, blue: 0.8))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -81,7 +83,7 @@ struct FlightTrackingWidget: Widget {
                     HStack {
                         Text(context.attributes.departureCity)
                         Image(systemName: "arrow.right")
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color(red: 0.6, green: 0.4, blue: 0.8))
                         Text(context.attributes.arrivalCity)
                     }
                     .font(.caption)
@@ -94,7 +96,7 @@ struct FlightTrackingWidget: Widget {
                     .font(.caption2)
             } minimal: {
                 Image(systemName: "airplane")
-                    .foregroundColor(.purple)
+                    .foregroundColor(Color(red: 0.6, green: 0.4, blue: 0.8))
             }
         }
     }

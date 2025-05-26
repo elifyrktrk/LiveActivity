@@ -26,14 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Set the delegate for the notification center
         Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
         UNUserNotificationCenter.current().delegate = self
-        
-        let liveActivityManager = LiveActivityManager()
-        liveActivityManager.registerForMatchScoreActivity()
-        
         // sil
         let user = NetmeraUser()
         user.userId = "elif"
         Netmera.updateUser(user: user)
+     
+        
+        let liveActivityManager = LiveActivityManager()
+        liveActivityManager.registerForMatchScoreActivity()
+        
+     
         
         // iOS 17.2 ve üzeri sürümlerde Live Activity takibi için Netmera'ya register işlemi yapılmalıdır.
         // Bu işlem sayesinde Netmera, belirli bir Activity türüne ait tokenları dinlemeye başlar.
@@ -51,24 +53,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
 
   
-        
         // Local olarak başlatılan bir Live Activity, kullanıcı tarafından manuel olarak sonlandırıldığında
         // uygulama ile olan bağlantısı kesilir. Bu durumda, uygulama tekrar açıldığında ilgili activity’yi
         // yeniden observe (izleme) işlemi yapılmalıdır.
 
         // Bu işlem, AppDelegate içerisindeki application(_:didFinishLaunchingWithOptions:) metodunda çağrılmalıdır.
         // Böylece hem local başlatılan activity’ler hem de uzaktan (remote) başlatılan activity’ler yeniden izlenebilir hale gelir.
-
-        // Bu adım, özellikle remote başlatılan activity’ler için kritik öneme sahiptir ve mutlaka dökümana dahil edilmelidir.
-
-        // Eğer bu metot çağrılmazsa, kullanıcı bir activity’yi manuel olarak sonlandırdığında
-        // Netmera bu durumu fark edemez ve ilgili token’lar backend’de birikmeye devam eder.
-        // Bu da gereksiz token yığılmasına ve performans sorunlarına yol açabilir.
-
-        // Bu nedenle, bir activity sonlandırıldığında onunla ilişkili token’ın da temizlenebilmesi için
-        // bu metot mutlaka kullanılmalıdır.
         Netmera.resumeObservingActivities(ofType: Activity<MatchScoreAttributes>.self)
-        
+       
         return true
     }
 
