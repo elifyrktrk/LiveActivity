@@ -50,9 +50,7 @@ Required Info.plist settings for the main app:
 ```
 
 
-## Live Activity Usage
-
-### 1. Activity Attributes Definition
+## Step 1: Activity Attributes Definition
 ActivityAttributes: This protocol defines the static (unchanging) and dynamic (changing) content that will be displayed in the Live Activity.
 ActivityAttributes.ContentState: This type defines the dynamic data that will be updated throughout the lifecycle of the activity.
 
@@ -75,6 +73,22 @@ struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
     }
 }
 ```
+
+## Step 2: Start the Activity
+
+First, choose how you want to register your activity:
+
+**Remote**: Use the `Netmera.register()` method early in your user lifecycle and before the push-to-start token is needed,  
+then start an activity using the `/rest/3.0/sendBulkNotification` endpoint.
+
+**Local**: If the Live Activity is started locally (not via Netmera), you must inform Netmera so it can track and manage the activity lifecycle.  
+To do this, call the following method **right after starting your activity**:
+
+```swift
+Netmera.observeActivity(matchActivity)
+
+
+
 
 ### 2. Activity Registration
 
