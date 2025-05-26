@@ -112,8 +112,6 @@ In this example, the Live Activity represents a football match score update.
 
 | Parameter             | Description |
 |-----------------------|-------------|
-| `title`, `text`       | Content of the notification shown to the user when the Live Activity starts. |
-| `platforms`           | Set to `"IOS"` to target iOS users. |
 | `type`                | Must be `"LIVE_ACTIVITY"` to activate the Live Activity feature. |
 | `contentState`        | Contains dynamic values that can be updated throughout the activity (e.g. score, match status). |
 | `liveActAttr`         | Contains static metadata used in the widget. All fields are required. |
