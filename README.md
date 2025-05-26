@@ -39,14 +39,6 @@ Required Info.plist settings for the main app:
 <array>
     <string>remote-notification</string>
 </array>
-<key>NSUserActivityTypes</key>
-<array>
-    <string>MatchScoreAttributes</string>
-    <string>DeliveryTrackingAttributes</string>
-    <string>PublicTransportAttributes</string>
-    <string>FlightTrackingAttributes</string>
-    <string>FintechAttributes</string>
-</array>
 ```
 
 
