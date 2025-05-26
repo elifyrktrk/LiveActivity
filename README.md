@@ -85,7 +85,7 @@ then start an activity using the `/rest/3.0/sendBulkNotification` endpoint.
 To do this, call the following method **right after starting your activity**:
 
 ```swift
-Netmera.observeActivity(matchActivity)
+ Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
 ```
 
 ###  Start a Live Activity Remotely via Netmera REST API
