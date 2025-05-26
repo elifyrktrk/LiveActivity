@@ -89,8 +89,6 @@ Netmera.observeActivity(matchActivity)
 ```
 
 
-
-
 ###  Activity Registration
 
 For iOS 17.2 and later, Live Activities must be registered with Netmera for tracking:
@@ -101,6 +99,56 @@ func registerForMatchScoreActivity() {
     Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
 }
 ```
+
+
+## Step 3: Resume Activity Tracking
+
+To ensure Netmera continues tracking Live Activities when the app is reopened:
+
+- If a Live Activity that was started locally is manually ended by the user,  
+its connection with the app is lost. Therefore, when the app is relaunched,  
+the activity must be observed again to restore tracking.
+
+This should be handled inside the `application(_:didFinishLaunchingWithOptions:)` method of your `AppDelegate`.  
+Doing so ensures that both locally and remotely started activities are properly re-observed on app launch.
+
+```swift
+Netmera.resumeObservingActivities(ofType: Activity<MatchScoreAttributes>.self)
+```
+
+### Example
+
+```swift
+import UIKit
+import NetmeraLiveActivity
+import ActivityKit
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        Netmera.initialize()
+        Netmera.setLogLevel(.debug) // Options: .debug, .info, .error, .fault
+        // Use .debug mode to view detailed Netmera logs
+        
+        Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
+        UNUserNotificationCenter.current().delegate = self // Set the delegate for the notification center
+
+        let liveActivityManager = LiveActivityManager()
+        liveActivityManager.registerForMatchScoreActivity()
+        
+        if #available(iOS 16.1, *) {
+            Netmera.resumeObservingActivities(ofType: Activity<MatchScoreAttributes>.self)
+        }
+
+        return true
+    }
+}
+```
+
 
 ###  Start a Live Activity Remotely via Netmera REST API
 
