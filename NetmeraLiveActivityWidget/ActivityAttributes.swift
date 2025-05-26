@@ -76,7 +76,11 @@ struct FlightTrackingAttributes: ActivityAttributes , NetmeraLiveActivityAttribu
 }
 
 
-struct FintechAttributes: ActivityAttributes {
+struct FintechAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
+    var netmeraGroupId: String?
+    
+    public static var activityIdentifier: String = "FintechAttributes"
+    
     public struct ContentState: Codable, Hashable {
         var balance: Double
         var changePercentage: Double

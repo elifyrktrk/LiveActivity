@@ -4,11 +4,6 @@ import NetmeraCore
 import NetmeraLiveActivity
 
 struct ContentView: View {
-    @State private var matchActivity: Activity<MatchScoreAttributes>?
-    @State private var deliveryActivity: Activity<DeliveryTrackingAttributes>?
-    @State private var transportActivity: Activity<PublicTransportAttributes>?
-    @State private var flightActivity: Activity<FlightTrackingAttributes>?
-    @State private var fintechActivity: Activity<FintechAttributes>?
     @State private var errorMessage: String?
     @State private var showError = false
     
@@ -67,10 +62,10 @@ struct ContentView: View {
                     Button("Start Fintech Activity") {
                         startFintechActivity()
                     }
-                    Button("Update  Fintech Activity") {
+                    Button("Update Fintech Activity") {
                         updateFintechStatus()
                     }
-                    Button("End  Fintech Activity") {
+                    Button("End Fintech Activity") {
                         endFintechActivity()
                     }
                 }
@@ -90,64 +85,18 @@ struct ContentView: View {
     }
     
     // MARK: - Match Score Activity
-//    Dökümana localden başlatılan activitynin update edilebilmesi için eklenecek örnek
- 
     private func startMatchActivity() {
-        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
-            showError("Live Activities are not enabled")
-            return
-        }
-        let attributes = MatchScoreAttributes(netmeraGroupId: "testGroupId",
-                                              homeTeamName: "Barcelona",
-                                              awayTeamName: "Real Madrid",
-                                              homeTeamLogo: "barcelona_logo",
-                                              awayTeamLogo: "madrid_logo")
-        let contentState = MatchScoreAttributes.ContentState(
-            homeTeamScore: 0,
-            awayTeamScore: 0,
-            matchStatus: "1st half"
-        )
         do {
-            matchActivity = try Activity.request(
-                attributes: attributes,
-                contentState: contentState,
-                pushType: .token
-            ) as Activity<MatchScoreAttributes>
-            if let matchActivity{
-                // Netmera üzerinden başlatılmayan, yani uygulama tarafından local olarak başlatılan Live Activity’ler için
-                // Netmera.observeActivity(_:) metodunun çağrılması gerekir.
-
-                // Eğer daha önce register işlemi yapıldıysa, teorik olarak Netmera bu activity’nin başlatıldığını algılayabilir.
-                // Ancak bu durum her zaman garanti değildir. Bu nedenle, **özellikle activity uygulama tarafından local olarak başlatılıyorsa**
-                // güvenilir bir izleme sağlamak amacıyla observe işlemi mutlaka manuel olarak yapılmalıdır.
-
-                // Bu yöntemle, activity’nin yaşam döngüsü boyunca Netmera’nın ilgili token’ı takip etmesi ve gerektiğinde güncellemeleri işlemesi sağlanır.
-
-                // Bu adım, sadece local başlatma senaryoları için geçerlidir; remote başlatmalarda gerekli değildir.
-                Netmera.observeActivity(matchActivity)
-            }
-            print("Match activity started successfully")
+            try LiveActivityManager.shared.startMatchActivity()
         } catch {
             showError("Error starting match activity: \(error.localizedDescription)")
         }
     }
     
     private func updateMatchScore() {
-        guard let activity = matchActivity else {
-            showError("No active match activity")
-            return
-        }
-        
         Task {
             do {
-                let updatedContentState = MatchScoreAttributes.ContentState(
-                    homeTeamScore: Int.random(in: 0...5),
-                    awayTeamScore: Int.random(in: 0...5),
-                    matchStatus: "Second Half"
-                )
-                
-                await activity.update(using: updatedContentState)
-                print("Match score updated successfully")
+                try await LiveActivityManager.shared.updateMatchScore()
             } catch {
                 showError("Error updating match score: \(error.localizedDescription)")
             }
@@ -155,16 +104,9 @@ struct ContentView: View {
     }
     
     private func endMatchActivity() {
-        guard let activity = matchActivity else {
-            showError("No active match activity")
-            return
-        }
-        
         Task {
             do {
-                await activity.end(dismissalPolicy: .immediate)
-                matchActivity = nil
-                print("Match activity ended successfully")
+                try await LiveActivityManager.shared.endMatchActivity()
             } catch {
                 showError("Error ending match activity: \(error.localizedDescription)")
             }
@@ -173,167 +115,117 @@ struct ContentView: View {
     
     // MARK: - Delivery Tracking Activity
     private func startDeliveryActivity() {
-        let attributes = DeliveryTrackingAttributes()
-        let contentState = DeliveryTrackingAttributes.ContentState(
-            deliveryStatus: "In Transit",
-            remainingStops: 5,
-            estimatedDeliveryTime: Date().addingTimeInterval(3600),
-            courierName: "John Doe"
-        )
-        
         do {
-            deliveryActivity = try Activity.request(
-                attributes: attributes,
-                contentState: contentState,
-                pushType: nil
-            )
+            try LiveActivityManager.shared.startDeliveryActivity()
         } catch {
-            print("Error starting delivery activity: \(error.localizedDescription)")
+            showError("Error starting delivery activity: \(error.localizedDescription)")
         }
     }
     
     private func updateDeliveryStatus() {
         Task {
-            let updatedContentState = DeliveryTrackingAttributes.ContentState(
-                deliveryStatus: "In Transit",
-                remainingStops: Int.random(in: 0...5),
-                estimatedDeliveryTime: Date().addingTimeInterval(Double.random(in: 1800...7200)),
-                courierName: "John Doe"
-            )
-            
-            await deliveryActivity?.update(using: updatedContentState)
+            do {
+                try await LiveActivityManager.shared.updateDeliveryStatus()
+            } catch {
+                showError("Error updating delivery status: \(error.localizedDescription)")
+            }
         }
     }
     
     private func endDeliveryActivity() {
         Task {
-            await deliveryActivity?.end(dismissalPolicy: .immediate)
+            do {
+                try await LiveActivityManager.shared.endDeliveryActivity()
+            } catch {
+                showError("Error ending delivery activity: \(error.localizedDescription)")
+            }
         }
     }
     
     // MARK: - Public Transport Activity
     private func startTransportActivity() {
-        let attributes = PublicTransportAttributes()
-        let contentState = PublicTransportAttributes.ContentState(
-            vehicleNumber: "34BZ",
-            remainingTime: 5,
-            stopName: "Mecidiyeköy",
-            vehicleType: "bus"
-        )
-        
         do {
-            transportActivity = try Activity.request(
-                attributes: attributes,
-                contentState: contentState,
-                pushType: nil
-            )
+            try LiveActivityManager.shared.startTransportActivity()
         } catch {
-            print("Error starting transport activity: \(error.localizedDescription)")
+            showError("Error starting transport activity: \(error.localizedDescription)")
         }
     }
     
     private func updateTransportStatus() {
         Task {
-            let updatedContentState = PublicTransportAttributes.ContentState(
-                vehicleNumber: "34BZ",
-                remainingTime: Int.random(in: 1...10),
-                stopName: "Mecidiyeköy",
-                vehicleType: "bus"
-            )
-            
-            await transportActivity?.update(using: updatedContentState)
+            do {
+                try await LiveActivityManager.shared.updateTransportStatus()
+            } catch {
+                showError("Error updating transport status: \(error.localizedDescription)")
+            }
         }
     }
     
     private func endTransportActivity() {
         Task {
-            await transportActivity?.end(dismissalPolicy: .immediate)
+            do {
+                try await LiveActivityManager.shared.endTransportActivity()
+            } catch {
+                showError("Error ending transport activity: \(error.localizedDescription)")
+            }
         }
     }
     
     // MARK: - Flight Tracking Activity
     private func startFlightActivity() {
-        let attributes = FlightTrackingAttributes(netmeraGroupId: "testGroupIdForFlight", flightNumber: "THY123", arrivalCity: "London", airlineLogo: "thy_logo", departureCity: "Istanbul")
-        let contentState = FlightTrackingAttributes.ContentState(
-//            flightNumber: "THY123",
-            departureTime: Date().addingTimeInterval(3600),
-            arrivalTime: Date().addingTimeInterval(7200),
-//            departureCity: "Istanbul",
-//            arrivalCity: "London",
-            gateNumber: "210"
-//            airlineLogo: "thy_logo"
-        )
-        
         do {
-            flightActivity = try Activity.request(
-                attributes: attributes,
-                contentState: contentState,
-                pushType: nil
-            )
+            try LiveActivityManager.shared.startFlightActivity()
         } catch {
-            print("Error starting flight activity: \(error.localizedDescription)")
+            showError("Error starting flight activity: \(error.localizedDescription)")
         }
     }
     
     private func updateFlightStatus() {
         Task {
-            let updatedContentState = FlightTrackingAttributes.ContentState(
-//                flightNumber: "THY123",
-                departureTime: Date().addingTimeInterval(3600),
-                arrivalTime: Date().addingTimeInterval(7200),
-//                departureCity: "Istanbul",
-//                arrivalCity: "London",
-                gateNumber: String(Int.random(in: 200...300))
-//                airlineLogo: "thy_logo"
-            )
-            
-            await flightActivity?.update(using: updatedContentState)
+            do {
+                try await LiveActivityManager.shared.updateFlightStatus()
+            } catch {
+                showError("Error updating flight status: \(error.localizedDescription)")
+            }
         }
     }
     
     private func endFlightActivity() {
         Task {
-            await flightActivity?.end(dismissalPolicy: .immediate)
+            do {
+                try await LiveActivityManager.shared.endFlightActivity()
+            } catch {
+                showError("Error ending flight activity: \(error.localizedDescription)")
+            }
         }
     }
     
     // MARK: - Fintech Activity
     private func startFintechActivity() {
-        let attributes = FintechAttributes()
-        let contentState = FintechAttributes.ContentState(
-            balance: 1.2,
-            changePercentage: 1.3,
-            isPositive: true,
-            investmentProgress: 2.4
-        )
-        
         do {
-            fintechActivity = try Activity.request(
-                attributes: attributes,
-                contentState: contentState,
-                pushType: nil
-            )
+            try LiveActivityManager.shared.startFintechActivity()
         } catch {
-            print("Error starting Fintech activity: \(error.localizedDescription)")
+            showError("Error starting fintech activity: \(error.localizedDescription)")
         }
     }
     
     private func updateFintechStatus() {
         Task {
-            let updatedContentState = FintechAttributes.ContentState(
-                balance: 2.2,
-                changePercentage: 5.3,
-                isPositive: false,
-                investmentProgress: 4.4
-            )
-            
-            await fintechActivity?.update(using: updatedContentState)
+            do {
+                try await LiveActivityManager.shared.updateFintechStatus()
+            } catch {
+                showError("Error updating fintech status: \(error.localizedDescription)")
+            }
         }
     }
     
     private func endFintechActivity() {
         Task {
-            await fintechActivity?.end(dismissalPolicy: .immediate)
+            do {
+                try await LiveActivityManager.shared.endFintechActivity()
+            } catch {
+                showError("Error ending fintech activity: \(error.localizedDescription)")
+            }
         }
     }
 } 
