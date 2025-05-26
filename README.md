@@ -208,8 +208,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 }
 ```
 
-
-
 ## Step 4:  Update a Live Activity Remotely via Netmera REST API
 
 ```xml
@@ -239,6 +237,16 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
     "action": "END",
     "priority": 10
 }'
+```
+## 🛑 Unregistering a Live Activity
+
+You can stop tracking a specific Live Activity using the `Netmera.unregister(name:)` method.
+
+#### 📌 Example Use Case:
+When a user removes a football match from their favorites, and no longer wants to see updates on the lock screen or widget, you should call:
+
+```swift
+Netmera.unregister(name: matchActivity)
 ```
 
 ## Important Notes
