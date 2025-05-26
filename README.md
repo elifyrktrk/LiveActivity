@@ -81,11 +81,15 @@ First, choose how you want to register your activity:
 **Remote**: Use the `Netmera.register()` method early in your user lifecycle and before the push-to-start token is needed,  
 then start an activity using the `/rest/3.0/sendBulkNotification` endpoint.
 
+```swift
+ Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+```
+
 **Local**: If the Live Activity is started locally (not via Netmera), you must inform Netmera so it can track and manage the activity lifecycle.  
 To do this, call the following method **right after starting your activity**:
 
 ```swift
- Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+ Netmera.observeActivity(matchActivity)
 ```
 
 ###  Start a Live Activity Remotely via Netmera REST API
