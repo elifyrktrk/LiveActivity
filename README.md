@@ -122,7 +122,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
             "matchStatus": "1st Half"
         },
         "liveActAttr": {
-             "netmeraGroupId": "ars-liv-2025",
+            "netmeraGroupId": "ars-liv-2025",
             "homeTeamName": "Arsenal",
             "awayTeamName": "Liverpool",
             "homeTeamLogo": "barcelona_logo",
