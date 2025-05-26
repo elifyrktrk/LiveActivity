@@ -21,8 +21,7 @@ This project demonstrates how to use iOS Live Activities with Netmera integratio
 ## Requirements
 
 - iOS 17.2 or later
-- Xcode 14.1 or later
-- Netmera SDK
+- Netmera SDK 4.2.0 or later
 - Apple Developer account (required for Live Activities)
 
 ## Configuration
@@ -50,18 +49,12 @@ Required Info.plist settings for the main app:
 </array>
 ```
 
-Required Info.plist settings for the Widget Extension:
-
-```xml
-<key>NSSupportsLiveActivities</key>
-<true/>
-<key>NSSupportsLiveActivitiesFrequentUpdates</key>
-<true/>
-```
 
 ## Live Activity Usage
 
 ### 1. Activity Attributes Definition
+ActivityAttributes: This protocol defines the static (unchanging) and dynamic (changing) content that will be displayed in the Live Activity.
+ActivityAttributes.ContentState: This type defines the dynamic data that will be updated throughout the lifecycle of the activity.
 
 Each Live Activity requires a custom `ActivityAttributes` structure. Example:
 
