@@ -72,16 +72,6 @@ You can start an activity remotely or locally:
 **Remote:** You must call the Netmera.register(forType:name:) method early in your app's lifecycle, before the push-to-start token is generated, then start an activity using the /rest/3.0/sendBulkNotification endpoint.
 
 **Local:** Create an instance of your Live Activity, then use the Netmera.observeActivity method to let Netmera manage token and state updates of your activity.
-<details>
-  <summary><strong>🟦 Tab 1</strong></summary>
-
-  Tab 1 içeriği:  
-  Bu alanda ilk sekmenin içeriği yer alır.  
-  Örnek kod:
-
-  ```swift
-  print("Bu Tab 1'de gösterilen bir Swift kodudur.")
-</details>
 
 <details>
   <summary>Remote (iOS 17.2+)</summary>
