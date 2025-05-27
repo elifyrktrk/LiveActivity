@@ -1,6 +1,8 @@
 # Netmera Live Activity Sample
 
-This project demonstrates iOS Live Activities with Netmera integration. Examples include:
+This project demonstrates iOS Live Activities with Netmera integration. For more detailed information, please refer to the [Netmera Developer Guide on Live Activities](https://user.netmera.com/netmera-developer-guide/platforms/ios/new-ios-swift/live-activities).
+
+Examples include:
 - Match Score Tracking
 - Delivery Tracking
 - Public Transport Tracking
