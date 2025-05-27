@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Netmera Live Activity Sample
 
 Live Activities enable apps to display dynamic, real-time updates directly on glanceable areas like the Lock Screen, iPhone StandBy, Dynamic Island, and Apple Watch's Smart Stack, allowing users to monitor ongoing events, activities, or tasks without constantly reopening the app.
