@@ -26,39 +26,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Set the delegate for the notification center
         Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
         UNUserNotificationCenter.current().delegate = self
-        // sil
-        let user = NetmeraUser()
-        user.userId = "elif"
-        Netmera.updateUser(user: user)
      
-        
+        /*
+         Starting from iOS 17.2, Live Activities must be registered with Netmera
+         to enable push-based tracking of specific activity types.
+         The `register(forType:name:)` method listens for token updates related to a particular activity type.
+         This call can be placed inside AppDelegate's `application(_:didFinishLaunchingWithOptions:)`
+         or anywhere appropriate in the app's lifecycle.
+         In this case, the registration is triggered via the custom `LiveActivityManager` class.
+        */
         let liveActivityManager = LiveActivityManager()
         liveActivityManager.registerForMatchScoreActivity()
-        
-     
-        
-        // iOS 17.2 ve üzeri sürümlerde Live Activity takibi için Netmera'ya register işlemi yapılmalıdır.
-        // Bu işlem sayesinde Netmera, belirli bir Activity türüne ait tokenları dinlemeye başlar.
-        // register(forType:name:) metodu, AppDelegate içerisindeki application(_:didFinishLaunchingWithOptions:)
-        // metodunda ya da uygulamanın herhangi bir yerinde çağırılabilir. register çağrısından sonra Netmera tokenları dinlemeye başlar.
-        // (LiveActivityManager yazıp o şekilde dene)
 
-        // Dikkat edilmesi gereken bir diğer nokta da şudur:
-        // register işlemi gerçekleştirildikten sonra, ilgili Live Activity için start işlemi yapılır.
-        // Start işleminden hemen sonra update çağrılmamalıdır. İlk güncelleme için minimum 1 dakikalık bir bekleme süresi önerilir.
-//        if #available(iOS 17.2, *) {
-//            Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
-//        }
-        
-        
-
-  
-        // Local olarak başlatılan bir Live Activity, kullanıcı tarafından manuel olarak sonlandırıldığında
-        // uygulama ile olan bağlantısı kesilir. Bu durumda, uygulama tekrar açıldığında ilgili activity’yi
-        // yeniden observe (izleme) işlemi yapılmalıdır.
-
-        // Bu işlem, AppDelegate içerisindeki application(_:didFinishLaunchingWithOptions:) metodunda çağrılmalıdır.
-        // Böylece hem local başlatılan activity’ler hem de uzaktan (remote) başlatılan activity’ler yeniden izlenebilir hale gelir.
+        /*
+         When the app is killed, Live Activity observation stops.
+         To resume observing after relaunch, call this in AppDelegate’s application(_:didFinishLaunchingWithOptions:).
+         This ensures both local and remote Live Activities can be tracked again.
+        */
         Netmera.resumeObservingActivities(ofType: Activity<MatchScoreAttributes>.self)
        
         return true

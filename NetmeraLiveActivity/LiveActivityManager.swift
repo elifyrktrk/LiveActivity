@@ -43,30 +43,15 @@ class LiveActivityManager {
     }
     
     // MARK: - Match Score Activity
+    @available(iOS 16.2, *)
     func startMatchActivity() throws {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
             throw LiveActivityError.activitiesNotEnabled
         }
         
-        let attributes = MatchScoreAttributes(
-            netmeraGroupId: "testGroupId",
-            homeTeamName: "Barcelona",
-            awayTeamName: "Real Madrid",
-            homeTeamLogo: "barcelona_logo",
-            awayTeamLogo: "madrid_logo"
-        )
-        
-        let contentState = MatchScoreAttributes.ContentState(
-            homeTeamScore: 0,
-            awayTeamScore: 0,
-            matchStatus: "1st half"
-        )
-        
-        matchActivity = try Activity.request(
-            attributes: attributes,
-            contentState: contentState,
-            pushType: .token
-        )
+        let attributes = MatchScoreAttributes(netmeraGroupId: "testGroupId",homeTeamName: "Barcelona",awayTeamName: "Real Madrid",homeTeamLogo: "barcelona_logo",awayTeamLogo: "madrid_logo")
+        let contentState = MatchScoreAttributes.ContentState(homeTeamScore: 0,awayTeamScore: 0,matchStatus: "1st half")
+        matchActivity = try Activity.request(attributes: attributes,contentState: contentState,pushType: .token)
         
         if let matchActivity {
             Netmera.observeActivity(matchActivity)
