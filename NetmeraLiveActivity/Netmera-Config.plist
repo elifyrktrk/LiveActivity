@@ -7,7 +7,7 @@
 		<key>use_ui_scene</key>
 		<true/>
 		<key>api_key</key>
-		<string>HvW5RQsozoCcTCWkI_EEptwww3j2hOt-_ZoxS39ki-0xxroicl2JBA</string>
+		<string>your_sdk_api_key</string>
 	</dict>
 	<key>location_max_active_region</key>
 	<string></string>
