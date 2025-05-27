@@ -1,13 +1,5 @@
 # Netmera Live Activity Sample
 
-Live Activities enable apps to display dynamic, real-time updates directly on glanceable areas like the Lock Screen, iPhone StandBy, Dynamic Island, and Apple Watch's Smart Stack, allowing users to monitor ongoing events, activities, or tasks without constantly reopening the app.
-
-Ideal for tracking short-to-medium-length tasks, Live Activities present prioritized information such as live sports scores, delivery updates, or fitness metrics, and can offer interactive options for user control. For best practices, ensure a concise layout suited to all display locations, avoid sensitive information, and refrain from using Live Activities for advertising, preserving them as a tool for useful, timely updates.
-
-## Netmera and Live Activities
-
-To facilitate this feature, Netmera has integrated additional functionalities into the existing message delivery framework specifically designed for Live Activity.
-
 This project demonstrates how to use iOS Live Activities with Netmera integration. The project includes examples for different scenarios:
 
 - Match Score Tracking
@@ -249,7 +241,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 }
 ```
 
-#### 4. Update Live Activity
+### 4. Update Live Activity
 You can update the content of an ongoing Live Activity by sending a REST API request to Netmera:
 ```json
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
@@ -267,7 +259,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 }'
 ```
 
-#### 5. End Live Activity
+### 5. End Live Activity
 To stop a Live Activity, send an END action request via Netmera REST API:
 ```json
 curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
@@ -280,7 +272,7 @@ curl --location 'https://restapi.netmera.com/rest/3.0/update-live-activity' \
 }'
 ```
 
-#### Unregistering Activity
+### Unregistering Activity
 You can stop tracking a specific Live Activity in your app by calling:
 ```swift
 Netmera.unregister(name: activityName)
@@ -291,5 +283,5 @@ Netmera.unregister(name: activityName)
 - If the names do not match exactly, the unregistration will not take effect.
 - Example use case: When a user removes a football match from their favorites and no longer wants updates on the lock screen or widget, call the unregister method.
 
-## Debugging
+#### Debugging
 If you encounter the error "`Cannot observe activity, missing required attribute: netmeraGroupId`", ensure that netmeraGroupId is properly defined in your ActivityAttributes structure.
