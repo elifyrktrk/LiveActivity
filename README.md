@@ -87,261 +87,48 @@ Failing to configure this correctly will result in the widget extension being un
 
 ## Step 2: Start a Live Activity
 
-You can start an activity in two ways:
+You can start an activity remotely or locally:
 
-<<<<<<< HEAD
 <div class="tab">
-  <button class="tablinks active" onclick="openTab(event, 'Remote')">Remote Start</button>
-  <button class="tablinks" onclick="openTab(event, 'Local')">Local Start</button>
+  <button class="tablinks active" onclick="openTab(event, 'Remote')">Remote</button>
+  <button class="tablinks" onclick="openTab(event, 'Local')">Local</button>
 </div>
 
 <div id="Remote" class="tabcontent" style="display: block;">
-  <h4>Remote Start</h4>
-  <p>To use remote Live Activity registration, iOS 17.2 or later is required.</p>
-
-  <h5>2.1. Register Activity Type</h5>
-  <p>To enable Live Activity tracking in iOS 17.2 and later, you must register the Live Activity type with Netmera. This allows Netmera to track and associate push tokens for the specified activity type.</p>
-
-  <p>Use the <code>Netmera.register(forType:name:)</code> method to register your Live Activity type. You can call this method:</p>
   <ul>
-    <li>Inside <code>application(_:didFinishLaunchingWithOptions:)</code> in your AppDelegate, or</li>
-    <li>At an appropriate point in your app's lifecycle before showing the Live Activity.</li>
+    <li>
+      **Remote:** You must call the <code>Netmera.register(forType:name:)</code> method **early in your app's lifecycle**, before the push-to-start token is generated, then start an activity using the <code>/rest/3.0/sendBulkNotification</code> endpoint.
+    </li>
   </ul>
-
-  <p>Example:</p>
-  ```swift
-  if #available(iOS 17.2, *) {
-      Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
-  }
-  ```
-=======
-Remote: You must call the Netmera.register(forType:name:) method early in your app’s lifecycle, before the push-to-start token is generated, then start an activity using the /rest/3.0/sendBulkNotification endpoint.
-
-Local: Create an instance of your Live Activity, then use the Netmera.observeActivity  method to let Netmera manage token and state updates of your activity.
-
-#### Remote Start
-To use remote Live Activity registration, iOS 17.2 or later is required.
-2.1. Register Activity Type
-To enable Live Activity tracking in iOS 17.2 and later, you must register the Live Activity type with Netmera. This allows Netmera to track and associate push tokens for the specified activity type.
-
-Registration Method
-
-Use the Netmera.register(forType:name:) method to register your Live Activity type.
-
-You can call this method:
-
-Inside application(_:didFinishLaunchingWithOptions:) in your AppDelegate, or
-
-At an appropriate point in your app’s lifecycle before showing the Live Activity.
-
-Example use case:
-When a user adds a team to favorites, you can register the related activity type in advance to prepare for future updates.
-
-Example:
-
-Copy
-if #available(iOS 17.2, *) {
-    Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
-}
-Once registered, Netmera begins listening for push tokens linked to this activity type.
-
-2.2. Start a Live Activity Remotely via Netmera REST API
-You can trigger a Live Activity remotely on iOS devices using Netmera’s REST API. The example below demonstrates starting a Live Activity for tracking a football match score.
-
-Copy
-curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
---header 'X-netmera-api-key: your_rest_api_key' \
---header 'Content-Type: application/json' \
---data '{
-    "message": {
-        "title": "Live Activity Start",
-        "text": "Here your live activity",
-        "platforms": [
-            "IOS"
-        ],
-        "contentState": {
-            "homeTeamScore": 0,
-            "awayTeamScore": 0,
-            "matchStatus": "1st Half"
-        },
-        "liveActAttr": {
-            "netmeraGroupId": "ars-liv-2025",
-            "homeTeamName": "Arsenal",
-            "awayTeamName": "Liverpool",
-            "homeTeamLogo": "barcelona_logo",
-            "awayTeamLogo": "madrid_logo"
-        },
-        "liveActAttrType": "MatchScoreAttributes"
-    },
-    "type": "LIVE_ACTIVITY",
-    "target": {
-        "sendToAll": true
-    }
-}'
-Required Fields
-All fields in the liveActAttr object are mandatory:
-
-netmeraGroupId
-
-homeTeamName
-
-awayTeamName
-
-homeTeamLogo
-
-awayTeamLogo 
-
-If any of these fields (e.g., awayTeamLogo) are missing, the request will fail, and the Live Activity will not be shown.
-
-Key Parameters
-Parameter
-Description
-type
-
-Must be "LIVE_ACTIVITY" to activate the Live Activity feature.
-
-contentState
-
-Contains dynamic values that can be updated throughout the activity (e.g. score, match status).
-
-liveActAttr
-
-Contains static metadata used in the widget. All fields are required.
-
-netmeraGroupId
-
-A unique ID that groups the same activity across different users.
-
-homeTeamName
-
-Name of the home team to be displayed in the widget.
-
-awayTeamName
-
-Name of the away team to be displayed.
-
-homeTeamLogo
-
-Media identifier for the home team logo.
-
-awayTeamLogo
-
-Media identifier for the away team logo.
-
-liveActAttrType
-
-Must match the name of your ActivityAttributes Swift class/struct.
-
-sendToAll
-
-Set to true to broadcast the activity to all users. You can replace this with custom targeting if needed.
-
-#### Local Start
-You can use Apple's ActivityKit framework to create a Live Activity instance locally on the device. The Netmera SDK manages the push token generated by ActivityKit, enabling you to update Live Activities via the Netmera API.
-
-Steps to Start a Live Activity Locally:
-1. Create an instance of your Live Activity using Apple's ActivityKit APIs
-2. Set the pushType parameter to .token to generate a push token
-3. Pass the previously defined ActivityAttributes and ContentState when creating the activity
-4. Register the Live Activity with Netmera
-(This registration step is required only for Live Activities started locally)
-
-```swift
-Netmera.observeActivity(matchActivity)
-```
-Example: LiveActivityManager Class
-
-Below is an example implementation of a manager class that starts a Live Activity for a match score.
->>>>>>> 0ac25afe65cbc95b7b4ef3192dc3dac5bf897b99
-
-  <h5>2.2. Start a Live Activity Remotely via Netmera REST API</h5>
-  <p>You can trigger a Live Activity remotely on iOS devices using Netmera's REST API. The example below demonstrates starting a Live Activity for tracking a football match score.</p>
-
-  ```xml
-  curl --location 'https://restapi.netmera.com/rest/3.0/sendBulkNotification' \
-  --header 'X-netmera-api-key: your_rest_api_key' \
-  --header 'Content-Type: application/json' \
-  --data '{
-      "message": {
-          "title": "Live Activity Start",
-          "text": "Here your live activity",
-          "platforms": [
-              "IOS"
-          ],
-          "contentState": {
-              "homeTeamScore": 0,
-              "awayTeamScore": 0,
-              "matchStatus": "1st Half"
-          },
-          "liveActAttr": {
-              "netmeraGroupId": "ars-liv-2025",
-              "homeTeamName": "Arsenal",
-              "awayTeamName": "Liverpool",
-              "homeTeamLogo": "barcelona_logo",
-              "awayTeamLogo": "madrid_logo"
-          },
-          "liveActAttrType": "MatchScoreAttributes"
-      },
-      "type": "LIVE_ACTIVITY",
-      "target": {
-          "sendToAll": true
-      }
-  }'
-  ```
-
-  <h5>Required Fields</h5>
-  <p>All fields in the <code>liveActAttr</code> object are mandatory:</p>
-  <ul>
-    <li>netmeraGroupId</li>
-    <li>homeTeamName</li>
-    <li>awayTeamName</li>
-    <li>homeTeamLogo</li>
-    <li>awayTeamLogo</li>
-  </ul>
-  <p>If any of these fields are missing, the request will fail, and the Live Activity will not be shown.</p>
-
-  <h5>Key Parameters</h5>
-  <table>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>type</td>
-      <td>Must be "LIVE_ACTIVITY" to activate the Live Activity feature.</td>
-    </tr>
-    <tr>
-      <td>contentState</td>
-      <td>Contains dynamic values that can be updated throughout the activity.</td>
-    </tr>
-    <tr>
-      <td>liveActAttr</td>
-      <td>Contains static metadata used in the widget. All fields are required.</td>
-    </tr>
-    <tr>
-      <td>netmeraGroupId</td>
-      <td>A unique ID that groups the same activity across different users.</td>
-    </tr>
-    <tr>
-      <td>liveActAttrType</td>
-      <td>Must match the name of your ActivityAttributes Swift class/struct.</td>
-    </tr>
-  </table>
 </div>
 
 <div id="Local" class="tabcontent">
-  <h4>Local Start</h4>
-  <p>You can use Apple's ActivityKit framework to create a Live Activity instance locally on the device. The Netmera SDK manages the push token generated by ActivityKit, enabling you to update Live Activities via the Netmera API.</p>
+  <ul>
+    <li>
+      **Local:** Create an instance of your Live Activity, then use the <code>Netmera.observeActivity</code> method to let Netmera manage token and state updates of your activity.
+    </li>
+  </ul>
 
-  <h5>Steps to Start a Live Activity Locally:</h5>
+  <p>You can use Apple's <code>ActivityKit</code> framework to create a Live Activity instance locally on the device. The Netmera SDK manages the push token generated by <code>ActivityKit</code>, enabling you to update Live Activities via the Netmera API. Netmera sends this push token to the Apple Push Notification service (APNs) on the backend.</p>
+
+  <h5>Steps to Start a Live Activity Locally</h5>
   <ol>
-    <li>Create an instance of your Live Activity using Apple's ActivityKit APIs</li>
-    <li>Set the pushType parameter to .token to generate a push token</li>
-    <li>Pass the previously defined ActivityAttributes and ContentState when creating the activity</li>
-    <li>Register the Live Activity with Netmera</li>
+    <li>Create an instance of your Live Activity using Apple's <code>ActivityKit</code> APIs.</li>
+    <li>Set the <code>pushType</code> parameter to <code>.token</code> to generate a push token.</li>
+    <li>Pass the previously defined <code>ActivityAttributes</code> and <code>ContentState</code> when creating the activity.</li>
+    <li>
+      Register the Live Activity with Netmera by calling:
+      <br>(This registration step is required only for Live Activities started locally)
+    </li>
   </ol>
 
-  <p>Example: LiveActivityManager Class</p>
+  ```swift
+  Netmera.observeActivity(matchActivity)
+  ```
+
+  <h5>Example: <code>LiveActivityManager</code> Class</h5>
+  <p>Below is an example implementation of a manager class that starts a Live Activity for a match score.</p>
+
   ```swift
   import NetmeraCore
   import NetmeraLiveActivity
@@ -375,12 +162,6 @@ Below is an example implementation of a manager class that starts a Live Activit
       }
   }
   ```
-
-  <h5>Important Notes:</h5>
-  <ul>
-    <li>The Live Activity widget will display the initial ContentState provided during creation</li>
-    <li>Netmera's backend uses the associated push token to send updates to this Live Activity through the Apple Push Notification service</li>
-  </ul>
 </div>
 
 <style>
@@ -552,7 +333,6 @@ If you encounter the error:
 "🔴 - [LiveActivityManagerImpl.swift] Cannot observe activity, missing required attribute: netmeraGroupId
 ```
 It indicates that the `netmeraGroupId` attribute is missing. Ensure it is correctly provided in your ActivityAttributes structure.
-
 
 
 
