@@ -78,6 +78,16 @@ Remote: You must call the Netmera.register(forType:name:) method early in your a
 
 Local: Create an instance of your Live Activity, then use the Netmera.observeActivity  method to let Netmera manage token and state updates of your activity.
 
+<details>
+  <summary>Detayları Göster</summary>
+
+  Buraya detaylı açıklama, örnek kod, görseller vs. koyabilirsin.
+
+  - Madde 1
+  - Madde 2
+
+</details>
+
 #### Remote 
 To use remote Live Activity registration, iOS 17.2 or later is required.
 
