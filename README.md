@@ -72,61 +72,16 @@ You can start an activity remotely or locally:
 **Remote:** You must call the Netmera.register(forType:name:) method early in your app's lifecycle, before the push-to-start token is generated, then start an activity using the /rest/3.0/sendBulkNotification endpoint.
 
 **Local:** Create an instance of your Live Activity, then use the Netmera.observeActivity method to let Netmera manage token and state updates of your activity.
+<details>
+  <summary><strong>🟦 Tab 1</strong></summary>
 
-<style>
-  .tabs {
-    display: flex;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  .tab {
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    margin-right: 5px;
-    background: #f0f0f0;
-    border-radius: 5px 5px 0 0;
-  }
-  .tab:hover {
-    background: #e0e0e0;
-  }
-  .tab-content {
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-top: none;
-    display: none;
-  }
-  .active {
-    display: block;
-  }
-  .selected {
-    background: white;
-    border-bottom: 1px solid white;
-  }
-</style>
+  Tab 1 içeriği:  
+  Bu alanda ilk sekmenin içeriği yer alır.  
+  Örnek kod:
 
-<div class="tabs">
-  <div class="tab selected" onclick="showTab('tab1', this)">Tab 1</div>
-  <div class="tab" onclick="showTab('tab2', this)">Tab 2</div>
-</div>
-
-<div id="tab1" class="tab-content active">
-  <p>Tab 1 içeriği: Bu alanda ilk sekmenin içeriği yer alır.</p>
-</div>
-
-<div id="tab2" class="tab-content">
-  <p>Tab 2 içeriği: Bu alanda ikinci sekmenin içeriği yer alır.</p>
-</div>
-
-<script>
-  function showTab(tabId, element) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-
-    document.querySelectorAll('.tab').forEach(el => el.classList.remove('selected'));
-    element.classList.add('selected');
-  }
-</script>
-
+  ```swift
+  print("Bu Tab 1'de gösterilen bir Swift kodudur.")
+</details>
 
 <details>
   <summary>Remote (iOS 17.2+)</summary>
