@@ -3,7 +3,7 @@ import ActivityKit
 import NetmeraLiveActivity
 
 // Make sure this file is added to both main app and widget extension targets via "Target Membership".
-// Otherwise, the widget cannot access this struct and will cause build errors.
+// Otherwise, app cannot access ActivityAttributes defined here which will cause build errors.
 
 // MARK: - Match Score Activity
 
@@ -11,8 +11,8 @@ struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
     // Required for Netmera integration
     // `netmeraGroupId` is mandatory and must be unique for each activity
     // Used by Netmera to group identical activities across users and update them with a single request
-
     var netmeraGroupId: String?
+
     var homeTeamName: String
     var awayTeamName: String
     var homeTeamLogo: String
@@ -29,6 +29,7 @@ struct MatchScoreAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
 }
 
 // MARK: - Delivery Tracking Activity
+
 struct DeliveryTrackingAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
     var netmeraGroupId: String?
     
@@ -43,6 +44,7 @@ struct DeliveryTrackingAttributes: ActivityAttributes, NetmeraLiveActivityAttrib
 }
 
 // MARK: - Public Transport Activity
+
 struct PublicTransportAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
     var netmeraGroupId: String?
     
@@ -57,7 +59,8 @@ struct PublicTransportAttributes: ActivityAttributes, NetmeraLiveActivityAttribu
 }
 
 // MARK: - Flight Tracking Activity
-struct FlightTrackingAttributes: ActivityAttributes , NetmeraLiveActivityAttributes {
+
+struct FlightTrackingAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
     var netmeraGroupId: String?
     var flightNumber: String
     var arrivalCity: String
@@ -75,6 +78,7 @@ struct FlightTrackingAttributes: ActivityAttributes , NetmeraLiveActivityAttribu
     }
 }
 
+// MARK: - FinTech Activity
 
 struct FintechAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
     var netmeraGroupId: String?
@@ -88,4 +92,3 @@ struct FintechAttributes: ActivityAttributes, NetmeraLiveActivityAttributes {
         var investmentProgress: Double
     }
 } 
-
