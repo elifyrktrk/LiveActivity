@@ -1,6 +1,5 @@
 import SwiftUI
 import ActivityKit
-import NetmeraCore
 import NetmeraLiveActivity
 
 struct ContentView: View {

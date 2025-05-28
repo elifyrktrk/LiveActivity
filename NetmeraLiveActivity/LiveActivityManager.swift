@@ -1,17 +1,10 @@
-//
-//  LiveActivityManager.swift
-//  NetmeraLiveActivitySample
-//
-//  Created by Elif Yürektürk on 23.05.2025.
-//
-
 import NetmeraLiveActivity
 import NetmeraCore
 import ActivityKit
 
 class LiveActivityManager {
     static let shared = LiveActivityManager()
-    
+
     private var matchActivity: Activity<MatchScoreAttributes>?
     private var deliveryActivity: Activity<DeliveryTrackingAttributes>?
     private var transportActivity: Activity<PublicTransportAttributes>?
@@ -23,36 +16,56 @@ class LiveActivityManager {
     // MARK: - Registration Methods
     @available(iOS 17.2, *)
     func registerForMatchScoreActivity() {
-        Netmera.register(forType: Activity<MatchScoreAttributes>.self, name: "MatchScoreAttributes")
+        Netmera.register(forType: Activity<MatchScoreAttributes>.self,
+                         name: MatchScoreAttributes.activityIdentifier)
     }
-    
+
+    @available(iOS 17.2, *)
     func registerForDeliveryTrackingActivity() {
-        Netmera.register(forType: Activity<DeliveryTrackingAttributes>.self, name: "DeliveryTrackingAttributes")
+        Netmera.register(forType: Activity<DeliveryTrackingAttributes>.self,
+                         name: DeliveryTrackingAttributes.activityIdentifier)
     }
-    
+
+    @available(iOS 17.2, *)
     func registerForFintechActivity() {
-        Netmera.register(forType: Activity<FintechAttributes>.self, name: "FintechAttributes")
+        Netmera.register(forType: Activity<FintechAttributes>.self,
+                         name: FintechAttributes.activityIdentifier)
     }
-    
+
+    @available(iOS 17.2, *)
     func registerForFlightTrackingActivity() {
-        Netmera.register(forType: Activity<FlightTrackingAttributes>.self, name: "FlightTrackingAttributes")
+        Netmera.register(forType: Activity<FlightTrackingAttributes>.self,
+                         name: FlightTrackingAttributes.activityIdentifier)
     }
-    
+
+    @available(iOS 17.2, *)
     func registerForPublicTransportActivity() {
-        Netmera.register(forType: Activity<PublicTransportAttributes>.self, name: "PublicTransportAttributes")
+        Netmera.register(forType: Activity<PublicTransportAttributes>.self,
+                         name: PublicTransportAttributes.activityIdentifier)
     }
     
     // MARK: - Match Score Activity
-    @available(iOS 16.2, *)
+  
     func startMatchActivity() throws {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
             throw LiveActivityError.activitiesNotEnabled
         }
-        
-        let attributes = MatchScoreAttributes(netmeraGroupId: "testGroupId",homeTeamName: "Barcelona",awayTeamName: "Real Madrid",homeTeamLogo: "barcelona_logo",awayTeamLogo: "madrid_logo")
-        let contentState = MatchScoreAttributes.ContentState(homeTeamScore: 0,awayTeamScore: 0,matchStatus: "1st half")
-        matchActivity = try Activity.request(attributes: attributes,contentState: contentState,pushType: .token)
-        
+
+        guard matchActivity == nil else { return }
+
+        let attributes = MatchScoreAttributes(netmeraGroupId: "testGroupId",
+                                              homeTeamName: "Barcelona",
+                                              awayTeamName: "Real Madrid",
+                                              homeTeamLogo: "barcelona_logo",
+                                              awayTeamLogo: "madrid_logo")
+        let contentState = MatchScoreAttributes.ContentState(homeTeamScore: 0,
+                                                             awayTeamScore: 0,
+                                                             matchStatus: "1st half")
+
+        matchActivity = try Activity.request(attributes: attributes,
+                                             content: .init(state: contentState, staleDate: nil),
+                                             pushType: .token)
+
         if let matchActivity {
             Netmera.observeActivity(matchActivity)
         }
@@ -68,8 +81,16 @@ class LiveActivityManager {
             awayTeamScore: Int.random(in: 0...5),
             matchStatus: "Second Half"
         )
-        
-        await activity.update(using: updatedContentState)
+
+        if #available(iOS 17.2, *) {
+          await activity.update(.init(state: updatedContentState, staleDate: nil),
+                                alertConfiguration: .init(title: "Match update",
+                                                          body: "New goal",
+                                                          sound: .default),
+                                timestamp: .now)
+        } else {
+          await activity.update(.init(state: updatedContentState, staleDate: nil))
+        }
     }
     
     func endMatchActivity() async throws {
@@ -77,7 +98,7 @@ class LiveActivityManager {
             throw LiveActivityError.noActiveActivity
         }
         
-        await activity.end(dismissalPolicy: .immediate)
+        await activity.end(nil, dismissalPolicy: .immediate)
         matchActivity = nil
     }
     
@@ -93,7 +114,7 @@ class LiveActivityManager {
         
         deliveryActivity = try Activity.request(
             attributes: attributes,
-            contentState: contentState,
+            content: .init(state: contentState, staleDate: nil),
             pushType: nil
         )
     }
@@ -110,7 +131,7 @@ class LiveActivityManager {
             courierName: "John Doe"
         )
         
-        await activity.update(using: updatedContentState)
+        await activity.update(.init(state: updatedContentState, staleDate: nil))
     }
     
     func endDeliveryActivity() async throws {
@@ -118,7 +139,7 @@ class LiveActivityManager {
             throw LiveActivityError.noActiveActivity
         }
         
-        await activity.end(dismissalPolicy: .immediate)
+        await activity.end(nil, dismissalPolicy: .immediate)
         deliveryActivity = nil
     }
     
@@ -134,7 +155,7 @@ class LiveActivityManager {
         
         transportActivity = try Activity.request(
             attributes: attributes,
-            contentState: contentState,
+            content: .init(state: contentState, staleDate: nil),
             pushType: nil
         )
     }
@@ -151,7 +172,7 @@ class LiveActivityManager {
             vehicleType: "bus"
         )
         
-        await activity.update(using: updatedContentState)
+        await activity.update(.init(state: updatedContentState, staleDate: nil))
     }
     
     func endTransportActivity() async throws {
@@ -159,7 +180,7 @@ class LiveActivityManager {
             throw LiveActivityError.noActiveActivity
         }
         
-        await activity.end(dismissalPolicy: .immediate)
+        await activity.end(nil, dismissalPolicy: .immediate)
         transportActivity = nil
     }
     
@@ -181,7 +202,7 @@ class LiveActivityManager {
         
         flightActivity = try Activity.request(
             attributes: attributes,
-            contentState: contentState,
+            content: .init(state: contentState, staleDate: nil),
             pushType: nil
         )
     }
@@ -197,7 +218,7 @@ class LiveActivityManager {
             gateNumber: String(Int.random(in: 200...300))
         )
         
-        await activity.update(using: updatedContentState)
+        await activity.update(.init(state: updatedContentState, staleDate: nil))
     }
     
     func endFlightActivity() async throws {
@@ -205,7 +226,7 @@ class LiveActivityManager {
             throw LiveActivityError.noActiveActivity
         }
         
-        await activity.end(dismissalPolicy: .immediate)
+        await activity.end(nil, dismissalPolicy: .immediate)
         flightActivity = nil
     }
     
@@ -221,7 +242,7 @@ class LiveActivityManager {
         
         fintechActivity = try Activity.request(
             attributes: attributes,
-            contentState: contentState,
+            content: .init(state: contentState, staleDate: nil),
             pushType: nil
         )
     }
@@ -238,7 +259,7 @@ class LiveActivityManager {
             investmentProgress: 4.4
         )
         
-        await activity.update(using: updatedContentState)
+        await activity.update(.init(state: updatedContentState, staleDate: nil))
     }
     
     func endFintechActivity() async throws {
@@ -246,7 +267,7 @@ class LiveActivityManager {
             throw LiveActivityError.noActiveActivity
         }
         
-        await activity.end(dismissalPolicy: .immediate)
+        await activity.end(nil, dismissalPolicy: .immediate)
         fintechActivity = nil
     }
 }
